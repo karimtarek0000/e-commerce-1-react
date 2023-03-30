@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 
-function App(): JSX.Element {
+function Dashboard(): JSX.Element {
   return (
     <>
       <Navbar bg="light" variant="light">
@@ -17,4 +17,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default Dashboard;
