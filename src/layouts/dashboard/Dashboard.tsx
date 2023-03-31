@@ -1,11 +1,14 @@
+import { Container } from "react-bootstrap";
 import { Outlet } from "react-router";
-import NavC from "../../components/navbar/NavC";
+import Navbar from "../../components/navbar/NavC";
 
 function Dashboard(): JSX.Element {
   return (
     <>
-      <NavC />
-      <Outlet />
+      <Navbar />
+      <Container fluid>
+        <Outlet />
+      </Container>
     </>
   );
 }

@@ -17,10 +17,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/about",
-    element: <h1>About</h1>,
-  },
 ]);
 
 export const routerProviderProps: RouterProviderProps = {
