@@ -6,7 +6,7 @@ function Dashboard(): JSX.Element {
   return (
     <>
       <Navbar />
-      <Container fluid>
+      <Container>
         <Outlet />
       </Container>
     </>
