@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import { ChangeEventHandler, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 
 const validationSchema: object = Yup.object().shape({
   name: Yup.string().required("Please enter name"),
@@ -12,7 +13,12 @@ const validationSchema: object = Yup.object().shape({
       "Please enter a valid email address"
     )
     .required("Please enter email"),
-  password: Yup.string().required("Please enter password"),
+  password: Yup.string()
+    .matches(
+      /(?=.*[a-z]{2,})(?=.*[A-Z]{2,})(?=.*[0-9]{3,})(?=.*[@$%#]{1,})[a-zA-Z\d@$%#]{8,}/,
+      "Please enter a password like that | aaAA889@"
+    )
+    .required("Please enter password"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
@@ -26,6 +32,7 @@ type SignUpTypes = {
 };
 
 function SignUp(): JSX.Element {
+  const [loading, setLoading] = useState<boolean>(false);
   const [terms, setTerms] = useState<boolean>(false);
 
   const initialValues: SignUpTypes = {
@@ -39,6 +46,7 @@ function SignUp(): JSX.Element {
     initialValues,
     validationSchema,
     onSubmit(values: SignUpTypes, { resetForm }) {
+      setLoading(true);
       console.log("SignUp: ", values);
       setTerms(false);
       resetForm();
@@ -60,6 +68,7 @@ function SignUp(): JSX.Element {
           type="text"
           name="name"
           placeholder="Enter your name"
+          autoComplete="off"
         />
         {formik.touched.name && formik.errors.name && (
           <Form.Text className="text-muted">{formik.errors.name}</Form.Text>
@@ -76,6 +85,7 @@ function SignUp(): JSX.Element {
           type="email"
           name="email"
           placeholder="Enter your email"
+          autoComplete="off"
         />
         {formik.touched.email && formik.errors.email && (
           <Form.Text className="text-muted">{formik.errors.email}</Form.Text>
@@ -92,6 +102,7 @@ function SignUp(): JSX.Element {
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="off"
         />
         {formik.touched.password && formik.errors.password && (
           <Form.Text className="text-muted">{formik.errors.password}</Form.Text>
@@ -108,6 +119,7 @@ function SignUp(): JSX.Element {
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
+          autoComplete="off"
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
           <Form.Text className="text-muted">
@@ -137,9 +149,7 @@ function SignUp(): JSX.Element {
         label="Agree terms and conditions"
       />
 
-      <Button disabled={!terms} variant="primary" type="submit">
-        Sign up
-      </Button>
+      <SubmitBtn loading={loading} title="Sign up" disabled={!terms} />
     </Form>
   );
 }

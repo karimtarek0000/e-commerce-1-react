@@ -1,7 +1,9 @@
 import { useFormik } from "formik";
-import { Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 
 const validationSchema: object = Yup.object().shape({
   email: Yup.string()
@@ -19,6 +21,8 @@ type Login = {
 };
 
 function LogIn(): JSX.Element {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const initialValues: Login = {
     email: "",
     password: "",
@@ -28,6 +32,7 @@ function LogIn(): JSX.Element {
     initialValues,
     validationSchema,
     onSubmit(values: Login, { resetForm }) {
+      setLoading(true);
       console.log("Login: ", values);
       resetForm();
     },
@@ -83,9 +88,7 @@ function LogIn(): JSX.Element {
         Create new account
       </Link>
 
-      <Button variant="primary" type="submit">
-        Login
-      </Button>
+      <SubmitBtn loading={loading} title="Login" />
     </Form>
   );
 }

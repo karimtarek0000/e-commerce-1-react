@@ -1,10 +1,17 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 
 const validationSchema: object = Yup.object().shape({
-  password: Yup.string().required("Please enter password"),
+  password: Yup.string()
+    .matches(
+      /(?=.*[a-z]{2,})(?=.*[A-Z]{2,})(?=.*[0-9]{3,})(?=.*[@$%#]{1,})[a-zA-Z\d@$%#]{8,}/,
+      "Please enter a password like that | aaAA889@"
+    )
+    .required("Please enter password"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
@@ -16,6 +23,8 @@ type Forget = {
 };
 
 function ForgetPassword(): JSX.Element {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const initialValues: Forget = {
     password: "",
     confirmPassword: "",
@@ -25,6 +34,7 @@ function ForgetPassword(): JSX.Element {
     initialValues,
     validationSchema,
     onSubmit(values: Forget, { resetForm }) {
+      setLoading(true);
       console.log("Forget: ", values);
       resetForm();
     },
@@ -77,9 +87,7 @@ function ForgetPassword(): JSX.Element {
         </Link>
       </p>
 
-      <Button variant="primary" type="submit">
-        Reset password
-      </Button>
+      <SubmitBtn loading={loading} title="Reset password" />
     </Form>
   );
 }

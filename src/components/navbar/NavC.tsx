@@ -10,13 +10,6 @@ import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 
 function NavC(): JSX.Element {
-  // const navCollapse = useRef<HTMLDivElement>(null);
-  // const toggle = useRef<HTMLButtonElement>(null);
-
-  // const navCollapseHandler: MouseEventHandler = () => {
-  //   if (window.innerWidth < 992) toggle.current?.click();
-  // };
-
   return (
     <Navbar bg="light" expand="lg" className="mb-3">
       <Container className="align-items-end">
@@ -38,10 +31,11 @@ function NavC(): JSX.Element {
             <Form className="d-none d-lg-flex flex-grow-1">
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Search for products..."
                 className="me-2"
                 aria-label="Search"
               />
+              {/* TODO result block */}
             </Form>
             <Nav className="justify-content-end flex-grow-1 pe-3">
               <Nav.Link as={Link} to="/">
