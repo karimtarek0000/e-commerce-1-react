@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 const validationSchema: object = Yup.object().shape({
@@ -65,6 +66,22 @@ function LogIn(): JSX.Element {
           <Form.Text className="text-muted">{formik.errors.password}</Form.Text>
         )}
       </Form.Group>
+
+      {/* Go to forget password */}
+      <Link
+        to="forget-password"
+        className="d-block link-underline link-underline-opacity-0 mb-4 text-end"
+      >
+        forget password ?
+      </Link>
+
+      {/* Go to create a new account */}
+      <Link
+        to="/auth"
+        className="d-block link-underline link-underline-opacity-0 mb-4"
+      >
+        Create new account
+      </Link>
 
       <Button variant="primary" type="submit">
         Login

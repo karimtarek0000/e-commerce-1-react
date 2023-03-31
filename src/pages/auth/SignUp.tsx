@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
+import { ChangeEventHandler, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 const validationSchema: object = Yup.object().shape({
@@ -24,6 +26,8 @@ type SignUpTypes = {
 };
 
 function SignUp(): JSX.Element {
+  const [terms, setTerms] = useState<boolean>(false);
+
   const initialValues: SignUpTypes = {
     name: "",
     email: "",
@@ -39,6 +43,9 @@ function SignUp(): JSX.Element {
       resetForm();
     },
   });
+
+  const CheckboxChangeHandler: ChangeEventHandler = () =>
+    setTerms((terms) => !terms);
 
   return (
     <Form onSubmit={formik.handleSubmit}>
@@ -108,7 +115,28 @@ function SignUp(): JSX.Element {
         )}
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      {/* Go to login */}
+      <p>
+        You have an account ?
+        <Link
+          to="login"
+          className="ms-1 link-underline link-underline-opacity-0"
+        >
+          login
+        </Link>
+      </p>
+
+      {/* Agree for terms and conditions */}
+      <Form.Check
+        className="mb-4"
+        type="checkbox"
+        checked={terms}
+        id="checkbox"
+        onChange={CheckboxChangeHandler}
+        label="Agree terms and conditions"
+      />
+
+      <Button disabled={!terms} variant="primary" type="submit">
         Sign up
       </Button>
     </Form>
