@@ -33,13 +33,7 @@ function LogIn(): JSX.Element {
   });
 
   return (
-    <Form
-      onSubmit={formik.handleSubmit}
-      className="width-40 mx-auto height-100 d-flex flex-column justify-content-center"
-    >
-      {/* Title */}
-      <h2 className="text-center mb-4">E-commerce</h2>
-
+    <Form onSubmit={formik.handleSubmit}>
       {/* Email */}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
