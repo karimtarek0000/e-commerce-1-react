@@ -7,6 +7,7 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Logo from "../logo/Logo";
 
 function NavC(): JSX.Element {
   // const navCollapse = useRef<HTMLDivElement>(null);
@@ -18,9 +19,9 @@ function NavC(): JSX.Element {
 
   return (
     <Navbar bg="light" expand="lg" className="mb-3">
-      <Container fluid>
+      <Container className="align-items-end">
         <Navbar.Brand as={Link} to="/">
-          E-commerce
+          <Logo className="img-100" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
         <Navbar.Offcanvas
@@ -34,23 +35,19 @@ function NavC(): JSX.Element {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to="about">
-                About
-              </Nav.Link>
-            </Nav>
-            {/* <Form className="d-flex">
+            <Form className="d-none d-lg-flex flex-grow-1">
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
-            </Form> */}
+            </Form>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav.Link as={Link} to="/">
+                Home
+              </Nav.Link>
+            </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

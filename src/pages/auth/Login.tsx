@@ -69,7 +69,7 @@ function LogIn(): JSX.Element {
 
       {/* Go to forget password */}
       <Link
-        to="forget-password"
+        to="/auth/forget-password"
         className="d-block link-underline link-underline-opacity-0 mb-4 text-end"
       >
         forget password ?
@@ -77,7 +77,7 @@ function LogIn(): JSX.Element {
 
       {/* Go to create a new account */}
       <Link
-        to="/auth"
+        to="/auth/sign-up"
         className="d-block link-underline link-underline-opacity-0 mb-4"
       >
         Create new account

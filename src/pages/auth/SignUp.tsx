@@ -120,7 +120,7 @@ function SignUp(): JSX.Element {
       <p className="text-end">
         You have an account ?
         <Link
-          to="login"
+          to="/auth"
           className="ms-1 link-underline link-underline-opacity-0"
         >
           login

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProviderProps } from "react-router-dom";
 import Auth from "../layouts/auth/Auth";
 import Dashboard from "../layouts/dashboard/Dashboard";
+import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 // import { lazyLoadRoutes } from "./lazy";
@@ -27,12 +28,16 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Login />,
+      },
+      {
+        path: "sign-up",
         element: <SignUp />,
       },
       {
-        path: 'login',
-        element: <Login />,
-      }
+        path: "forget-password",
+        element: <ForgetPassword />,
+      },
     ],
   },
 ]);
