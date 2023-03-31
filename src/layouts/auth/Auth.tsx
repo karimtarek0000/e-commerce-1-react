@@ -1,10 +1,12 @@
+import { Container } from "react-bootstrap";
 import { Outlet } from "react-router";
 
 function Auth() {
   return (
     <>
-      <h1>Auth</h1>
-      <Outlet />
+      <Container fluid>
+        <Outlet />
+      </Container>
     </>
   );
 }
