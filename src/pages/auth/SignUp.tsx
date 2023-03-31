@@ -40,6 +40,7 @@ function SignUp(): JSX.Element {
     validationSchema,
     onSubmit(values: SignUpTypes, { resetForm }) {
       console.log("SignUp: ", values);
+      setTerms(false);
       resetForm();
     },
   });
@@ -116,7 +117,7 @@ function SignUp(): JSX.Element {
       </Form.Group>
 
       {/* Go to login */}
-      <p>
+      <p className="text-end">
         You have an account ?
         <Link
           to="login"
