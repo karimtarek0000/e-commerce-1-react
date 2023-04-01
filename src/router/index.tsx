@@ -4,6 +4,7 @@ import Dashboard from "../layouts/dashboard/Dashboard";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import Home from "../pages/home/Home";
 // import { lazyLoadRoutes } from "./lazy";
 
 const router = createBrowserRouter([
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Home</h1>,
+        element: <Home />,
       },
       {
         path: "about",

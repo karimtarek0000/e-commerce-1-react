@@ -1,17 +1,10 @@
-import {
-  Button,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  Offcanvas,
-} from "react-bootstrap";
+import { Container, Form, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 
 function NavC(): JSX.Element {
   return (
-    <Navbar bg="light" expand="lg" className="mb-3">
+    <Navbar bg="light" expand="lg" className="position-fixed top-0 w-100 z-3">
       <Container className="align-items-end">
         <Navbar.Brand as={Link} to="/">
           <Logo className="img-100" />
