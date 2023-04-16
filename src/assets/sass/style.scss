@@ -1,0 +1,17 @@
+@import "./_variables";
+@import "./_utilities";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "./_extends";
+@import "./_helpers";
+
+html {
+  font-size: map-get($font-base, normal);
+
+  @media (max-width: 48rem) {
+    font-size: 55%;
+  }
+}
+
+.carousel-caption {
+  bottom: inherit;
+}

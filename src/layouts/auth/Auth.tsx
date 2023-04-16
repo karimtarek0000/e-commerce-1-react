@@ -5,11 +5,11 @@ import Logo from "../../components/logo/Logo";
 function Auth(): JSX.Element {
   return (
     <Container fluid>
-      <div className="mx-auto height-100 d-flex flex-column justify-content-center">
+      <div className="mx-auto h-1vh d-flex flex-column justify-content-center">
         {/* Start row */}
         <div className="row justify-content-center">
           {/* Start col - image */}
-          <div className="d-none d-lg-flex col-lg-4 mt-4 mt-lg-0 align-items-center justify-content-center">
+          <div className="d-none d-lg-flex col-lg-4 mt-4 align-items-center justify-content-center">
             <img
               className="img-fluid"
               src="https://static.vecteezy.com/system/resources/previews/005/638/074/original/illustration-isometric-concept-safety-of-online-shopping-in-e-commerce-stores-free-vector.jpg"

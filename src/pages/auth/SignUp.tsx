@@ -129,7 +129,7 @@ function SignUp(): JSX.Element {
       </Form.Group>
 
       {/* Go to login */}
-      <p className="text-end">
+      <p className="text-end fs-4">
         You have an account ?
         <Link
           to="/auth"
@@ -141,7 +141,7 @@ function SignUp(): JSX.Element {
 
       {/* Agree for terms and conditions */}
       <Form.Check
-        className="mb-4"
+        className="mb-4 fs-4"
         type="checkbox"
         checked={terms}
         id="checkbox"

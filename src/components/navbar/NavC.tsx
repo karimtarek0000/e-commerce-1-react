@@ -1,42 +1,51 @@
-import { Container, Form, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  NavDropdown,
+  Navbar,
+  Offcanvas,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Cart from "../cart/Cart";
 import Logo from "../logo/Logo";
+import RenderSVG from "../svg/RenderSVG";
 
 function NavC(): JSX.Element {
   return (
-    <Navbar bg="light" expand="lg" className="position-fixed top-0 w-100 z-3">
-      <Container className="align-items-end">
+    <Navbar bg="light" expand="lg" fixed="top">
+      <Container>
+        {/* Logo */}
         <Navbar.Brand as={Link} to="/">
-          <Logo className="img-100" />
+          <Logo className="img-100 me-auto" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
-        <Navbar.Offcanvas
-          id="offcanvasNavbar-expand-lg"
-          aria-labelledby="offcanvasNavbarLabel-expand-lg"
-          placement="end"
+
+        {/* Navbar items */}
+        <Nav
+          className="me-auto overflow-visible flex-grow-1 d-flex  justify-content-between"
+          style={{ maxHeight: "100px" }}
+          navbarScroll
         >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">
-              E-commerce
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Form className="d-none d-lg-flex flex-grow-1">
-              <Form.Control
-                type="search"
-                placeholder="Search for products..."
-                className="me-2"
-                aria-label="Search"
-              />
-              {/* TODO result block */}
-            </Form>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-            </Nav>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
+          {/* Search */}
+          <Form className="d-none d-lg-flex">
+            <Form.Control
+              type="text"
+              placeholder="Search products..."
+              className="me-2 fs-3"
+              aria-label="Search"
+              style={{ width: "400px" }}
+            />
+          </Form>
+
+          {/*  */}
+          <div className="flex-end-center">
+            <RenderSVG className="me-5 cursor-pointer" name="profile" />
+            <Cart />
+            {/* Toggle button */}
+            <Navbar.Toggle className="ms-4 fs-2" aria-controls="navbarScroll" />
+          </div>
+        </Nav>
       </Container>
     </Navbar>
   );

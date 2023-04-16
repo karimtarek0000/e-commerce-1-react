@@ -1,0 +1,45 @@
+.form-label,
+a,
+.btn {
+  @extend .fs-4;
+}
+
+// Btn
+.btn {
+  @extend .py-2, .px-3;
+}
+
+// Form control
+.form-control {
+  @extend .fs-4, .py-3;
+}
+
+// Message
+.form-text {
+  @extend .fs-4;
+}
+
+// Center with flex
+.flex-center {
+  @extend .d-flex, .align-items-center, .justify-content-center;
+}
+
+// Center vertically and end horizontally with flex
+.flex-end-center {
+  @extend .d-flex, .align-items-center, .justify-content-end;
+}
+
+// Badge for numbers
+.badge {
+  width: 3rem;
+  height: 3rem;
+
+  @extend .flex-center,
+    .position-absolute,
+    .top-0,
+    .end-0,
+    .translate-middle,
+    .border,
+    .border-dark,
+    .rounded-circle;
+}

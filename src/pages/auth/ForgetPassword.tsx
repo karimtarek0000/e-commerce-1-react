@@ -77,7 +77,7 @@ function ForgetPassword(): JSX.Element {
       </Form.Group>
 
       {/* Go to login */}
-      <p className="text-end">
+      <p className="text-end fs-4">
         Back to
         <Link
           to="/auth"
