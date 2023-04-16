@@ -39,7 +39,12 @@ a,
     .top-0,
     .end-0,
     .translate-middle,
-    .border,
-    .border-dark,
-    .rounded-circle;
+    .rounded-circle,
+    .bg-primary;
+}
+.dropdown-toggle {
+  @extend .border-0, .bg-light;
+}
+.dropdown-menu {
+  @extend .w-25p;
 }

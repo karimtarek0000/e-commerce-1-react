@@ -10,4 +10,11 @@ $utilities: (
       auto: auto,
     ),
   ),
+  "width": (
+    property: width,
+    class: w,
+    values: (
+      25p: 25rem,
+    ),
+  ),
 );
