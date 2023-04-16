@@ -48,3 +48,10 @@ a,
 .dropdown-menu {
   @extend .w-25p;
 }
+.toast-alert {
+  @extend .fs-4;
+
+  & .go2072408551 {
+    max-width: initial;
+  }
+}

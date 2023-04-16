@@ -1,9 +1,14 @@
+import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 import { ChangeEventHandler, useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
+import { signUp } from "../../store/auth";
+import { RootStateAuth, SignUpTypes } from "../../types";
 
 const validationSchema: object = Yup.object().shape({
   name: Yup.string().required("Please enter name"),
@@ -19,37 +24,38 @@ const validationSchema: object = Yup.object().shape({
       "Please enter a password like that | aaAA889@"
     )
     .required("Please enter password"),
-  confirmPassword: Yup.string()
+  rePassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
 });
 
-type SignUpTypes = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
 function SignUp(): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(false);
   const [terms, setTerms] = useState<boolean>(false);
+  const { loading } = useSelector((state: RootStateAuth) => state.auth);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const navigate = useNavigate();
 
   const initialValues: SignUpTypes = {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    rePassword: "",
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit(values: SignUpTypes, { resetForm }) {
-      setLoading(true);
-      console.log("SignUp: ", values);
-      setTerms(false);
-      resetForm();
+    async onSubmit(data: SignUpTypes, { resetForm }) {
+      try {
+        resetForm();
+        await dispatch(signUp(data)).unwrap();
+        navigate("/", { replace: true });
+        toast.success(`Welcome ${data.name} Register successfully 👋`);
+      } catch (error) {
+        toast.error(`${error}`);
+      } finally {
+        setTerms(false);
+      }
     },
   });
 
@@ -70,7 +76,7 @@ function SignUp(): JSX.Element {
           placeholder="Enter your name"
           autoComplete="off"
         />
-        {formik.touched.name && formik.errors.name && (
+        {formik.errors.name && (
           <Form.Text className="text-muted">{formik.errors.name}</Form.Text>
         )}
       </Form.Group>
@@ -87,7 +93,7 @@ function SignUp(): JSX.Element {
           placeholder="Enter your email"
           autoComplete="off"
         />
-        {formik.touched.email && formik.errors.email && (
+        {formik.errors.email && (
           <Form.Text className="text-muted">{formik.errors.email}</Form.Text>
         )}
       </Form.Group>
@@ -104,7 +110,7 @@ function SignUp(): JSX.Element {
           placeholder="Password"
           autoComplete="off"
         />
-        {formik.touched.password && formik.errors.password && (
+        {formik.errors.password && (
           <Form.Text className="text-muted">{formik.errors.password}</Form.Text>
         )}
       </Form.Group>
@@ -113,17 +119,17 @@ function SignUp(): JSX.Element {
       <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control
-          value={formik.values.confirmPassword}
+          value={formik.values.rePassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           type="password"
-          name="confirmPassword"
+          name="rePassword"
           placeholder="Confirm Password"
           autoComplete="off"
         />
-        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+        {formik.errors.rePassword && (
           <Form.Text className="text-muted">
-            {formik.errors.confirmPassword}
+            {formik.errors.rePassword}
           </Form.Text>
         )}
       </Form.Group>
@@ -149,7 +155,11 @@ function SignUp(): JSX.Element {
         label="Agree terms and conditions"
       />
 
-      <SubmitBtn loading={loading} title="Sign up" disabled={!terms} />
+      <SubmitBtn
+        loading={loading}
+        title="Sign up"
+        disabled={!terms || loading}
+      />
     </Form>
   );
 }

@@ -1,9 +1,13 @@
+import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
+import { login } from "../../store/auth";
+import { Login, RootStateAuth } from "../../types";
 
 const validationSchema: object = Yup.object().shape({
   email: Yup.string()
@@ -12,16 +16,18 @@ const validationSchema: object = Yup.object().shape({
       "Please enter a valid email address"
     )
     .required("Please enter email"),
-  password: Yup.string().required("Please enter password"),
+  password: Yup.string()
+    .matches(
+      /(?=.*[a-z]{2,})(?=.*[A-Z]{2,})(?=.*[0-9]{3,})(?=.*[@$%#]{1,})[a-zA-Z\d@$%#]{8,}/,
+      "Please enter a password like that | aaAA889@"
+    )
+    .required("Please enter password"),
 });
 
-type Login = {
-  email: string;
-  password: string;
-};
-
 function LogIn(): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading } = useSelector((state: RootStateAuth) => state.auth);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const navigate = useNavigate();
 
   const initialValues: Login = {
     email: "",
@@ -31,10 +37,15 @@ function LogIn(): JSX.Element {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit(values: Login, { resetForm }) {
-      setLoading(true);
-      console.log("Login: ", values);
-      resetForm();
+    async onSubmit(data: Login, { resetForm }) {
+      try {
+        resetForm();
+        await dispatch(login(data)).unwrap();
+        navigate("/", { replace: true });
+        toast.success("Login successfully 👋");
+      } catch {
+        toast.error("Email or password not correct!");
+      }
     },
   });
 
@@ -88,7 +99,7 @@ function LogIn(): JSX.Element {
         Create new account
       </Link>
 
-      <SubmitBtn loading={loading} title="Login" />
+      <SubmitBtn title="Login" loading={loading} disabled={loading} />
     </Form>
   );
 }
