@@ -50,7 +50,7 @@ function SignUp(): JSX.Element {
         resetForm();
         await dispatch(signUp(data)).unwrap();
         navigate("/", { replace: true });
-        toast.success(`Welcome ${data.name} Register successfully 👋`);
+        toast.success(`Welcome ${data.name} | Register successfully 👋`);
       } catch (error) {
         toast.error(`${error}`);
       } finally {

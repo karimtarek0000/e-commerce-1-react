@@ -1,11 +1,19 @@
 import { Container, Form, Nav, Navbar } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootStateAuth } from "../../types";
+import AuthLinks from "../authLinks/AuthLinks";
 import Cart from "../cart/Cart";
 import Logo from "../logo/Logo";
 import Profile from "../profile/Profile";
-import AuthLinks from "../authLinks/AuthLinks";
 
 function NavC(): JSX.Element {
+  const { loggedIn, token, user } = useSelector(
+    (state: RootStateAuth) => state.auth
+  );
+
+  const statusAuth: Function = (): boolean => !!(loggedIn && token && user);
+
   return (
     <Navbar className="shadow" bg="light" expand="lg" fixed="top">
       <Container>
@@ -32,11 +40,14 @@ function NavC(): JSX.Element {
           </Form>
 
           <div className="flex-end-center">
-            {/* <div className="flex-center">
-              <Profile />
-              <Cart />
-            </div> */}
-            <AuthLinks />
+            {statusAuth() ? (
+              <div className="flex-center">
+                <Profile />
+                <Cart />
+              </div>
+            ) : (
+              <AuthLinks />
+            )}
             <Navbar.Toggle className="ms-4 fs-2" aria-controls="navbarScroll" />
           </div>
         </Nav>

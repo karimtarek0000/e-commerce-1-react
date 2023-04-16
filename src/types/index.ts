@@ -11,5 +11,5 @@ export type SignUpTypes = {
 };
 
 export type RootStateAuth = {
-  auth: { loading: boolean };
+  auth: { loading: boolean; loggedIn: boolean; token: string; user: object };
 };

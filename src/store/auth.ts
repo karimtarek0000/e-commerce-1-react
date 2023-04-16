@@ -54,6 +54,14 @@ const authSlice = createSlice({
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("loggedIn", JSON.stringify(true));
     },
+    setLogOut(state) {
+      state.user = null;
+      state.token = null;
+      state.loggedIn = false;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedIn");
+    },
   },
   extraReducers(builder) {
     builder
@@ -82,5 +90,5 @@ const authSlice = createSlice({
   },
 });
 
-// export const {} = authSlice.actions
+export const { setLogOut } = authSlice.actions;
 export default authSlice.reducer;
