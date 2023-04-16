@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Cart from "../cart/Cart";
 import Logo from "../logo/Logo";
 import Profile from "../profile/Profile";
+import AuthLinks from "../authLinks/AuthLinks";
 
 function NavC(): JSX.Element {
   return (
@@ -30,13 +31,12 @@ function NavC(): JSX.Element {
             />
           </Form>
 
-          {/*  */}
           <div className="flex-end-center">
-            <div className="flex-center">
+            {/* <div className="flex-center">
               <Profile />
               <Cart />
-            </div>
-            {/* Toggle button */}
+            </div> */}
+            <AuthLinks />
             <Navbar.Toggle className="ms-4 fs-2" aria-controls="navbarScroll" />
           </div>
         </Nav>
