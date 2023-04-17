@@ -1,0 +1,22 @@
+.card {
+  @extend .position-relative, .rounded-3, .border-0, .overflow-hidden;
+  &__overlay {
+    background: linear-gradient(
+      to top,
+      rgba($primary, 0.8) 5%,
+      rgba($primary, 0.1)
+    );
+    @extend .position-absolute, .h-100, .w-100, .top-0, .rounded-3, .z-3;
+  }
+  &__title {
+    @extend .position-absolute, .top-50, .start-50, .translate-middle;
+  }
+  & img {
+    @extend .img-fluid;
+  }
+}
+
+// .row-cols-4 > * {
+//   flex: 1 0 auto !important;
+//   width: 25%;
+// }

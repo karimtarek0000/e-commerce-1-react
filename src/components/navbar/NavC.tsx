@@ -15,7 +15,7 @@ function NavC(): JSX.Element {
   const statusAuth: Function = (): boolean => !!(loggedIn && token && user);
 
   return (
-    <Navbar className="shadow" bg="light" expand="lg" fixed="top">
+    <Navbar className="shadow" bg="light" expand="lg">
       <Container>
         {/* Logo */}
         <Navbar.Brand as={Link} to="/">

@@ -3,6 +3,7 @@
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "./_extends";
 @import "./_helpers";
+@import "./_card";
 
 html {
   font-size: map-get($font-base, normal);
@@ -15,5 +16,3 @@ html {
 .carousel-caption {
   bottom: inherit;
 }
-
-

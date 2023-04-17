@@ -5,7 +5,7 @@ import { Login, SignUpTypes } from "../types";
 // Login
 export const login = createAsyncThunk(
   "auth/login",
-  async (userData: Login, thunkAPI) => {
+  async (userData: Login, thunkAPI): Promise<object> => {
     const { rejectWithValue } = thunkAPI;
     try {
       const url = `${process.env.REACT_APP_VERSION}/auth/signin`;
@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
 // Signup
 export const signUp = createAsyncThunk(
   "auth/signup",
-  async (userData: SignUpTypes, thunkAPI) => {
+  async (userData: SignUpTypes, thunkAPI): Promise<object> => {
     const { rejectWithValue } = thunkAPI;
     try {
       const url = `${process.env.REACT_APP_VERSION}/auth/signup`;
