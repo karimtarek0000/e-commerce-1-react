@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import { ScrollRestoration } from "react-router-dom";
 import Navbar from "../../components/navbar/NavC";
 
 function Dashboard(): JSX.Element {
@@ -6,6 +7,8 @@ function Dashboard(): JSX.Element {
     <>
       <Navbar />
       <Outlet />
+
+      <ScrollRestoration getKey={(location) => location.pathname} />
     </>
   );
 }

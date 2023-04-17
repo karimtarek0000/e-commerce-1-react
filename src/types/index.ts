@@ -21,8 +21,13 @@ export type CategorieCardTypes = {
   name: string;
   image: string;
   slug: string;
+  type: string;
 };
 
 export type RootStateCategories = {
-  categories: { loading: boolean; categories: Array<CategorieCardTypes> };
+  categories: {
+    loading: boolean;
+    categories: Array<CategorieCardTypes>;
+    brands: Array<CategorieCardTypes>;
+  };
 };

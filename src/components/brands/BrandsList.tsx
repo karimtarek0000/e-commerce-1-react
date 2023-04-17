@@ -1,23 +1,30 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../store/categories";
+import { getBrands } from "../../store/categories";
 import { RootStateCategories } from "../../types";
-import CategorieCard from "./CategorieCard";
-import CategoriesLoading from "./CategoriesLoading";
+import CategorieCard from "../categories/CategorieCard";
+import CategoriesLoading from "../categories/CategoriesLoading";
 
-function CategoriesList(): JSX.Element {
+function BrandsList(): JSX.Element {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const { loading, categories } = useSelector(
+  const { loading, brands } = useSelector(
     (state: RootStateCategories) => state.categories
   );
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getBrands());
   }, [dispatch]);
 
-  let cards = categories.map(({ _id, name, image, slug }) => (
-    <CategorieCard key={_id} _id={_id} name={name} image={image} slug={slug} type="categories" />
+  let cards = brands.map(({ _id, name, image, slug }) => (
+    <CategorieCard
+      key={_id}
+      _id={_id}
+      name={name}
+      image={image}
+      slug={slug}
+      type="brands"
+    />
   ));
 
   return (
@@ -27,4 +34,4 @@ function CategoriesList(): JSX.Element {
   );
 }
 
-export default CategoriesList;
+export default BrandsList;

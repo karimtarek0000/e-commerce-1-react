@@ -17,12 +17,30 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+// Get Brands
+export const getBrands = createAsyncThunk(
+  "categories/getBrands",
+  async (_, thunkAPI): Promise<object> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/brands`;
+      const { data } = await axios.get(url);
+
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string);
+    }
+  }
+);
+
 const initialState: {
   loading: boolean;
   categories: Array<object>;
+  brands: Array<object>;
 } = {
   loading: false,
   categories: [],
+  brands: [],
 };
 
 const categoriesSlice = createSlice({
@@ -36,9 +54,20 @@ const categoriesSlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.categories.push(...(payload as Array<object>));
+        state.categories = payload as Array<object>;
       })
       .addCase(getCategories.rejected, (state) => {
+        state.loading = true;
+      })
+      //
+      .addCase(getBrands.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getBrands.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.brands = payload as Array<object>;
+      })
+      .addCase(getBrands.rejected, (state) => {
         state.loading = true;
       });
   },

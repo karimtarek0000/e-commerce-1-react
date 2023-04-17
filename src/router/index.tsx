@@ -4,6 +4,8 @@ import Dashboard from "../layouts/dashboard/Dashboard";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import Brands from "../pages/brands/Brands";
+import Categories from "../pages/categories/Categories";
 import Home from "../pages/home/Home";
 // import { lazyLoadRoutes } from "./lazy";
 
@@ -17,9 +19,12 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "about",
-        index: true,
-        element: <h1>About</h1>,
+        path: "brands/:name/:id",
+        element: <Brands />,
+      },
+      {
+        path: "categories/:name/:id",
+        element: <Categories />,
       },
     ],
   },

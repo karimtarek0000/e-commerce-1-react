@@ -1,17 +1,21 @@
 import { Container } from "react-bootstrap";
 
+import BrandsList from "../../components/brands/BrandsList";
 import CategoriesList from "../../components/categories/CategoriesList";
 import Slider from "../../components/slider/Slider";
 
 function Home() {
-  // if (true) return [1, 2, 3, 4].map((sk) => <Skeleton.Category />);
-
   return (
     <>
       <Slider />
-      <h2 className="text-center fs-1 my-5">All Categories</h2>
       <Container className="mt-4">
+        <h2 className="text-center fs-1 my-5">All Categories</h2>
         <CategoriesList />
+        <br />
+        <br />
+        <br />
+        <h2 className="text-center fs-1 my-5">All Brands</h2>
+        <BrandsList />
       </Container>
     </>
   );
