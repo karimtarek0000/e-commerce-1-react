@@ -76,7 +76,7 @@ function SignUp(): JSX.Element {
           placeholder="Enter your name"
           autoComplete="off"
         />
-        {formik.errors.name && (
+        {formik.touched.name && formik.errors.name && (
           <Form.Text className="text-muted">{formik.errors.name}</Form.Text>
         )}
       </Form.Group>
@@ -93,7 +93,7 @@ function SignUp(): JSX.Element {
           placeholder="Enter your email"
           autoComplete="off"
         />
-        {formik.errors.email && (
+        {formik.touched.email && formik.errors.email && (
           <Form.Text className="text-muted">{formik.errors.email}</Form.Text>
         )}
       </Form.Group>
@@ -110,7 +110,7 @@ function SignUp(): JSX.Element {
           placeholder="Password"
           autoComplete="off"
         />
-        {formik.errors.password && (
+        {formik.touched.password && formik.errors.password && (
           <Form.Text className="text-muted">{formik.errors.password}</Form.Text>
         )}
       </Form.Group>
@@ -127,7 +127,7 @@ function SignUp(): JSX.Element {
           placeholder="Confirm Password"
           autoComplete="off"
         />
-        {formik.errors.rePassword && (
+        {formik.touched.rePassword && formik.errors.rePassword && (
           <Form.Text className="text-muted">
             {formik.errors.rePassword}
           </Form.Text>

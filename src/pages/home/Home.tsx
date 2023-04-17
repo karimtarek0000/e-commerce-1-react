@@ -1,22 +1,17 @@
 import { Container } from "react-bootstrap";
+
+import CategoriesList from "../../components/categories/CategoriesList";
 import Slider from "../../components/slider/Slider";
 
 function Home() {
+  // if (true) return [1, 2, 3, 4].map((sk) => <Skeleton.Category />);
+
   return (
     <>
-      {/* <Slider /> */}
+      <Slider />
+      <h2 className="text-center fs-1 my-5">All Categories</h2>
       <Container className="mt-4">
-        <div className="row row-cols-md-4 gx-5 gy-4">
-          <div className="col card">
-            <img
-              src="https://res.cloudinary.com/dwp0imlbj/image/upload/v1680747343/Route-Academy-categories/1681511964020.jpeg"
-              alt=""
-              loading="lazy"
-            />
-            <div className="card__overlay"></div>
-            <h3 className="card__title">test</h3>
-          </div>
-        </div>
+        <CategoriesList />
       </Container>
     </>
   );

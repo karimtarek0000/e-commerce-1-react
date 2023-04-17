@@ -1,22 +1,27 @@
-.card {
-  @extend .position-relative, .rounded-3, .border-0, .overflow-hidden;
-  &__overlay {
+.category-card {
+  @extend .position-relative, .overflow-hidden, .cursor-pointer;
+
+  &::after {
+    content: "";
     background: linear-gradient(
       to top,
-      rgba($primary, 0.8) 5%,
-      rgba($primary, 0.1)
+      rgba(61, 65, 70, 80%) 5%,
+      rgba(13, 110, 253, 0.1)
     );
-    @extend .position-absolute, .h-100, .w-100, .top-0, .rounded-3, .z-3;
+    width: 96%;
+    @extend .position-absolute, .h-100, .top-0, .start-50, .translate-middle-x;
   }
   &__title {
-    @extend .position-absolute, .top-50, .start-50, .translate-middle;
+    @extend .position-absolute,
+      .top-50,
+      .start-50,
+      .z-3,
+      .fs-1,
+      .text-center,
+      .text-light,
+      .translate-middle;
   }
   & img {
-    @extend .img-fluid;
+    @extend .img-fluid, .object-fit-cover, .w-100, .h-100;
   }
 }
-
-// .row-cols-4 > * {
-//   flex: 1 0 auto !important;
-//   width: 25%;
-// }
