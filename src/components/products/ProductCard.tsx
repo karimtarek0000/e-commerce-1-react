@@ -11,6 +11,7 @@ function ProductCard({
   priceAfterDiscount,
   description,
   ratingsAverage,
+  quantity,
 }: ProductCardType): JSX.Element {
   return (
     <div className="col">
@@ -19,17 +20,17 @@ function ProductCard({
           src={imageCover}
           alt={name}
           loading="lazy"
-          className="img-resize mh-300"
+          className="img-resize maxh-300"
         />
-        <div className="p-2">
-          <h4 className="fs-2 text-capitalize">{title}</h4>
-          <p className="fs-4 truncate-par">{description}</p>
+        <div className="p-2 text-center">
+          <h4 className="fs-2 text-capitalize truncate-head">{title}</h4>
+          <p className="fs-4 truncate-par h-72 p-0">{description}</p>
 
           <div className="flex-center fs-4 gap-4">
-            {priceAfterDiscount && (
-              <span className="fw-bold fs-2">${priceAfterDiscount}</span>
-            )}
-            <span className="td-through">${price}</span>
+            <span className="fw-bold fs-2">
+              ${priceAfterDiscount ? priceAfterDiscount : price}
+            </span>
+            {priceAfterDiscount && <span className="td-through">${price}</span>}
           </div>
 
           <div className="flex-center mt-3">
@@ -57,6 +58,12 @@ function ProductCard({
               Add to favorit
             </ActionBtn>
           </div>
+
+          {!quantity && (
+            <h2 className="bg-danger text-light py-2 fs-2 text-capitalize mt-3 text-center">
+              out of stock
+            </h2>
+          )}
         </div>
       </div>
     </div>

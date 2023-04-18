@@ -1,0 +1,7 @@
+@mixin truncate($countLine: 3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $countLine;
+  -webkit-box-orient: vertical;
+}

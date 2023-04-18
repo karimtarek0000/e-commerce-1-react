@@ -12,9 +12,8 @@
   cursor: pointer;
 }
 .truncate-par {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  @include truncate;
+}
+.truncate-head {
+  @include truncate(1);
 }

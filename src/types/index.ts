@@ -25,6 +25,7 @@ export type ProductCardType = {
   priceAfterDiscount: number;
   description: string;
   ratingsAverage: number;
+  quantity:number;
 };
 
 export type RootStateProducts = {
