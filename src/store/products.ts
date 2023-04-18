@@ -38,15 +38,20 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getAllProducts.pending, (state) => {})
+      .addCase(getAllProducts.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(
         getAllProducts.fulfilled,
         (state, { payload }: { payload: AllProductsType }) => {
+          state.loading = false;
           state.products = payload.products as Array<ProductCardType>;
           state.pagination = payload.pagination as object;
         }
       )
-      .addCase(getAllProducts.rejected, (state) => {});
+      .addCase(getAllProducts.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

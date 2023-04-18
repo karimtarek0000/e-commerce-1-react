@@ -17,9 +17,11 @@ export type RootStateAuth = {
 
 // Products
 export type ProductCardType = {
+  _id: string;
   name: string;
   title: string;
-  image: string;
+  imageCover: string;
+  price: number;
   priceAfterDiscount: number;
   description: string;
   ratingsAverage: number;

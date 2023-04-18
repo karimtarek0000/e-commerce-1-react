@@ -16,8 +16,8 @@ function CategoriesList(): JSX.Element {
     dispatch(getCategories());
   }, [dispatch]);
 
-  let cards = categories.map(({ _id, name, image, slug }) => (
-    <CategorieCard key={_id} _id={_id} name={name} image={image} slug={slug} type="categories" />
+  let cards = categories.map((categ) => (
+    <CategorieCard key={categ._id} {...categ} type="categories" />
   ));
 
   return (
