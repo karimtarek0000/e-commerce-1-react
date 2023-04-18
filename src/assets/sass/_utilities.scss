@@ -11,6 +11,20 @@ $utilities: (
       auto: auto,
     ),
   ),
+  "max-height": (
+    property: max-height,
+    class: mh,
+    values: (
+      300: 30rem,
+    ),
+  ),
+  "text-decoration": (
+    property: text-decoration,
+    class: td,
+    values: (
+      through: line-through,
+    ),
+  ),
   "width": (
     property: width,
     class: w,

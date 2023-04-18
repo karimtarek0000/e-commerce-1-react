@@ -23,6 +23,6 @@
       .translate-middle;
   }
   & img {
-    @extend .img-fluid, .object-fit-cover, .w-100, .h-100;
+    @extend .img-resize;
   }
 }

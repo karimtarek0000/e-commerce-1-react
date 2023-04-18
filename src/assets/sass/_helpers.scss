@@ -4,6 +4,17 @@
 .img-100 {
   max-width: 10rem;
 }
+.img-resize {
+  object-position: top;
+  @extend .img-fluid, .object-fit-cover, .w-100, .h-100;
+}
 .cursor-pointer {
   cursor: pointer;
+}
+.truncate-par {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }

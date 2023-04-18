@@ -15,6 +15,16 @@ export type RootStateAuth = {
   auth: { loading: boolean; loggedIn: boolean; token: string; user: object };
 };
 
+// Products
+export type ProductCardType = {
+  name: string;
+  title: string;
+  image: string;
+  priceAfterDiscount: number;
+  description: string;
+  ratingsAverage: number;
+};
+
 // Categories
 export type CategorieCardTypes = {
   _id: string;
