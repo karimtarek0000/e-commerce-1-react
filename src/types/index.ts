@@ -25,6 +25,13 @@ export type ProductCardType = {
   ratingsAverage: number;
 };
 
+export type RootStateProducts = {
+  products: {
+    loading: boolean;
+    products: Array<ProductCardType>;
+  };
+};
+
 // Categories
 export type CategorieCardTypes = {
   _id: string;

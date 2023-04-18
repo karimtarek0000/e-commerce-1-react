@@ -1,12 +1,26 @@
 import { Button, Container } from "react-bootstrap";
 // import ProductCard from "../../components/products/ProductCard";
-import { useState } from "react";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import ActionBtn from "../../components/buttons/ActionBtn";
 import RenderSVG from "../../components/svg/RenderSVG";
+import { getAllProducts } from "../../store/products";
+import { RootStateProducts } from "../../types";
 
 function Categories() {
   const [rating] = useState<number>(2.5);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const { id } = useParams();
+  // const { loading } = useSelector(
+  //   (state: RootStateProducts) => state.products
+  // );
+
+  useEffect(() => {
+    dispatch(getAllProducts(id as string));
+  }, [dispatch, id]);
 
   return (
     <Container>
@@ -42,15 +56,6 @@ function Categories() {
                   readonly
                 />
               </div>
-
-              {/* <Button className="w-100 mt-3 flex-center gap-2">
-                <RenderSVG
-                  name="cart"
-                  size="1.6rem"
-                  style={{ fill: "white" }}
-                />
-                Add to cart
-              </Button> */}
 
               <div className="mt-3">
                 <ActionBtn loading={false} disabled={false}>
