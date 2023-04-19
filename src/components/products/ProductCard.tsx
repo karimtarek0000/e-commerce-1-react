@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import { ProductCardType } from "../../types";
 import ActionBtn from "../buttons/ActionBtn";
@@ -14,7 +15,7 @@ function ProductCard({
   quantity,
 }: ProductCardType): JSX.Element {
   return (
-    <div className="col">
+    <Link to="/" className="col text-dark td-none">
       <div className="border rounded overflow-hidden">
         <img
           src={imageCover}
@@ -60,13 +61,13 @@ function ProductCard({
           </div>
 
           {!quantity && (
-            <h2 className="bg-danger text-light py-2 fs-2 text-capitalize mt-3 text-center">
+            <h2 className="bg-danger text-light py-2 fs-2 text-capitalize mt-3 text-center rounded">
               out of stock
             </h2>
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

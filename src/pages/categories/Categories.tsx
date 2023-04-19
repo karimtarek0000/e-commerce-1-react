@@ -1,10 +1,11 @@
-import { Button, Container } from "react-bootstrap";
-// import ProductCard from "../../components/products/ProductCard";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import SkeletonLoader from "../../components/categories/SkeletonLoader";
 import ProductCard from "../../components/products/ProductCard";
+import { Skeleton } from "../../components/skeleton/Skeleton";
 import { getAllProducts } from "../../store/products";
 import { RootStateProducts } from "../../types";
 
@@ -25,10 +26,14 @@ function Categories() {
 
   return (
     <Container>
-      <h1>Categories</h1>
-
-      <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
-        {loading ? <h1>loading...</h1> : cards}
+      <div className="grid-cards">
+        {loading ? (
+          <SkeletonLoader>
+            <Skeleton.Product />
+          </SkeletonLoader>
+        ) : (
+          cards
+        )}
       </div>
     </Container>
   );
