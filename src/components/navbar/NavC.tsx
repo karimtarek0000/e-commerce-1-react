@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { RootStateAuth } from "../../types";
 import AuthLinks from "../authLinks/AuthLinks";
 import Cart from "../cart/Cart";
+import Favorit from "../favorit/Favorit";
 import Logo from "../logo/Logo";
 import Profile from "../profile/Profile";
 
@@ -43,7 +44,10 @@ function NavC(): JSX.Element {
             {statusAuth() ? (
               <div className="flex-center">
                 <Profile />
-                <Cart />
+                <div className="mx-5">
+                  <Cart />
+                </div>
+                <Favorit />
               </div>
             ) : (
               <AuthLinks />

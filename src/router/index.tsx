@@ -6,7 +6,9 @@ import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 import Brands from "../pages/brands/Brands";
+import Cart from "../pages/cart/Cart";
 import Categories from "../pages/categories/Categories";
+import Favorites from "../pages/favorites/Favorites";
 import Home from "../pages/home/Home";
 // import { lazyLoadRoutes } from "./lazy";
 
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "categories/:name/:id",
         element: <Categories />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "favorites",
+        element: <Favorites />,
       },
     ],
   },

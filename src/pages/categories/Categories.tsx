@@ -11,13 +11,13 @@ import { RootStateProducts } from "../../types";
 
 function Categories() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const { id } = useParams();
+  const { id, name } = useParams();
   const { loading, products } = useSelector(
     (state: RootStateProducts) => state.products
   );
 
   useEffect(() => {
-    dispatch(getAllProducts(id as string));
+    dispatch(getAllProducts({ categoryId: id as string, numPage: 1 }));
   }, [dispatch, id]);
 
   const cards = products.map((prod) => (
@@ -26,6 +26,7 @@ function Categories() {
 
   return (
     <Container>
+      <h1 className="text-center my-5">{name}</h1>
       <div className="grid-cards">
         {loading ? (
           <SkeletonLoader>
