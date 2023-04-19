@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProviderProps } from "react-router-dom";
 import Auth from "../layouts/auth/Auth";
 import Dashboard from "../layouts/dashboard/Dashboard";
+import NotFound from "../pages/404/NotFound";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         element: <ForgetPassword />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

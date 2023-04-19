@@ -7,8 +7,8 @@ $utilities: (
       50: 50%,
       75: 75%,
       100: 100%,
-      1vh: 100vh,
       72: 7.2rem,
+      test: 100vh,
       auto: auto,
     ),
   ),
@@ -24,7 +24,7 @@ $utilities: (
     class: td,
     values: (
       through: line-through,
-      none: none
+      none: none,
     ),
   ),
   "width": (
