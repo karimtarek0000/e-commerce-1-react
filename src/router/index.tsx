@@ -10,6 +10,7 @@ import Cart from "../pages/cart/Cart";
 import Categories from "../pages/categories/Categories";
 import Favorites from "../pages/favorites/Favorites";
 import Home from "../pages/home/Home";
+import ProductDetails from "../pages/productDetails/ProductDetails";
 // import { lazyLoadRoutes } from "./lazy";
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "favorites",
         element: <Favorites />,
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetails />,
       },
     ],
   },
