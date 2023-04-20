@@ -25,13 +25,14 @@ export type ProductCardType = {
   priceAfterDiscount: number;
   description: string;
   ratingsAverage: number;
-  quantity:number;
+  quantity: number;
 };
 
 export type RootStateProducts = {
   products: {
     loading: boolean;
     products: Array<ProductCardType>;
+    total: number;
   };
 };
 

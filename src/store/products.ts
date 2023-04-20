@@ -18,7 +18,7 @@ export const getAllProducts = createAsyncThunk(
 
       return {
         products: data.data,
-        pagination: data.metadata,
+        total: data.results,
       };
     } catch (error: any) {
       return rejectWithValue(error.response.data.message as string);
@@ -29,11 +29,11 @@ export const getAllProducts = createAsyncThunk(
 const initialState: {
   loading: boolean;
   products: Array<ProductCardType>;
-  pagination: object;
+  total: number;
 } = {
   loading: false,
   products: [],
-  pagination: {},
+  total: 0,
 };
 
 const productsSlice = createSlice({
@@ -50,7 +50,7 @@ const productsSlice = createSlice({
         (state, { payload }: { payload: AllProductsType }) => {
           state.loading = false;
           state.products = payload.products as Array<ProductCardType>;
-          state.pagination = payload.pagination as object;
+          state.total = payload.total as number;
         }
       )
       .addCase(getAllProducts.rejected, (state) => {

@@ -1,7 +1,8 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { useEffect } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import ResponsivePagination from "react-responsive-pagination";
 import { useParams } from "react-router-dom";
 import SkeletonLoader from "../../components/categories/SkeletonLoader";
 import ProductCard from "../../components/products/ProductCard";
@@ -10,15 +11,19 @@ import { getAllProducts } from "../../store/products";
 import { RootStateProducts } from "../../types";
 
 function Categories() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const { id, name } = useParams();
-  const { loading, products } = useSelector(
+  const { loading, products, total } = useSelector(
     (state: RootStateProducts) => state.products
   );
+  const totalPages = Math.ceil(total / 10);
 
   useEffect(() => {
-    dispatch(getAllProducts({ categoryId: id as string, numPage: 1 }));
-  }, [dispatch, id]);
+    dispatch(
+      getAllProducts({ categoryId: id as string, numPage: currentPage })
+    );
+  }, [dispatch, id, currentPage]);
 
   const cards = products.map((prod) => (
     <ProductCard key={prod._id} {...prod} />
@@ -27,7 +32,13 @@ function Categories() {
   return (
     <Container>
       <h1 className="text-center my-5">{name}</h1>
-      <div className="grid-cards">
+      <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
+
+      <div className="grid-cards my-5">
         {loading ? (
           <SkeletonLoader>
             <Skeleton.Product />
@@ -36,6 +47,12 @@ function Categories() {
           cards
         )}
       </div>
+
+      <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </Container>
   );
 }

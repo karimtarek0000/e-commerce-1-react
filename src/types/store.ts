@@ -1,1 +1,1 @@
-export type AllProductsType = { products?: object; pagination?: object };
+export type AllProductsType = { products?: object; total?: number };

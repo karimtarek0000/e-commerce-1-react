@@ -6,10 +6,6 @@
 @import "./_helpers";
 @import "./_card";
 
-body {
-  height: 10000px;
-}
-
 html {
   font-size: map-get($font-base, normal);
 
@@ -20,4 +16,29 @@ html {
 
 .carousel-caption {
   bottom: inherit;
+}
+
+.pagination {
+  justify-content: center;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.page-link {
+  display: block;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 2px;
+  text-decoration: none;
+}
+
+a.page-link:hover {
+  background-color: #cccccc;
+}
+
+.page-item.active .page-link {
+  color: #ffffff;
+  background-color: #007bff;
 }
