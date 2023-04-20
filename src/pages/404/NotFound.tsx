@@ -3,7 +3,7 @@ const Img404 = require("../../assets/images/404/404.svg").default;
 
 function NotFound(): JSX.Element {
   return (
-    <div className="row flex-center" style={{ height: "100vh" }}>
+    <div className="row flex-center h-1vh">
       <div className="col-sm-5 flex-center flex-column">
         <img className="img-resize" src={Img404} alt="404" />
         <p className="fs-4 fw-bold mb-5 text-center">
