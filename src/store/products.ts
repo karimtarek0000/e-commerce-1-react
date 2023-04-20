@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 import { ProductCardType } from "../types";
 import { AllProductsType } from "../types/store";
 
@@ -55,6 +56,7 @@ const productsSlice = createSlice({
       )
       .addCase(getAllProducts.rejected, (state) => {
         state.loading = false;
+        toast.error("Error please try again!");
       });
   },
 });

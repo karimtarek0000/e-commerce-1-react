@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../store/categories";
 import { RootStateCategories } from "../../types";
-import CategorieCard from "./CategorieCard";
 import { Skeleton } from "../skeleton/Skeleton";
+import CategorieCard from "./CategorieCard";
 import SkeletonLoader from "./SkeletonLoader";
 
 function CategoriesList(): JSX.Element {

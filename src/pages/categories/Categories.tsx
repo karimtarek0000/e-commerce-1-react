@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ResponsivePagination from "react-responsive-pagination";
 import { useParams } from "react-router-dom";
 import SkeletonLoader from "../../components/categories/SkeletonLoader";
+import NoData from "../../components/noData/NoData";
 import ProductCard from "../../components/products/ProductCard";
 import { Skeleton } from "../../components/skeleton/Skeleton";
 import { getAllProducts } from "../../store/products";
@@ -37,6 +38,8 @@ function Categories() {
         total={totalPages}
         onPageChange={setCurrentPage}
       />
+
+      <NoData loading={loading} data={products} title="No there any products" />
 
       <div className="grid-cards my-5">
         {loading ? (
