@@ -1,5 +1,5 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ResponsivePagination from "react-responsive-pagination";

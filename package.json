@@ -21,6 +21,7 @@
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-input-range-fork-for-react-18": "^1.0.0",
     "react-redux": "^8.0.5",
     "react-responsive-pagination": "^2.1.0",
     "react-router-dom": "^6.10.0",
