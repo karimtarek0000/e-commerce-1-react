@@ -10,6 +10,7 @@ import ProductCard from "../../components/products/ProductCard";
 import { Skeleton } from "../../components/skeleton/Skeleton";
 import { getAllProducts } from "../../store/products";
 import { RootStateProducts } from "../../types";
+import FilterBar from "../../components/filter/Filterbar";
 
 function Categories() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -33,6 +34,8 @@ function Categories() {
   return (
     <Container>
       <h1 className="text-center my-5">{name}</h1>
+      <FilterBar />
+
       <ResponsivePagination
         current={currentPage}
         total={totalPages}
@@ -40,7 +43,6 @@ function Categories() {
       />
 
       <NoData loading={loading} data={products} title="No there any products" />
-
       <div className="grid-cards my-5">
         {loading ? (
           <SkeletonLoader>
