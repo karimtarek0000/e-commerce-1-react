@@ -25,7 +25,7 @@ const FilterBar = ({
   };
   const filterHandler: MouseEventHandler = (): void => {
     const queres: string[] = [];
-    rating > 1 && queres.push(`&ratingsAverage[lte]=${rating}`);
+    rating > 1 && queres.push(`&ratingsAverage[gte]=${rating}`);
     queres.push(`&price[gte]=${price[0]}&price[lte]=${price[1]}`);
     const filter = queres.join("");
     setStatusFilter(true);
@@ -40,13 +40,13 @@ const FilterBar = ({
   };
 
   return (
-    <div className="my-5">
-      <p className="fs-2">
-        <span className="fw-bold mb-5 d-inline-block">You can filter by:</span>{" "}
+    <div style={{ marginBlock: "6rem" }}>
+      <p className="fs-3 text-center text-lg-start">
+        <span className="fw-bold mb-3 d-inline-block">You can filter by:</span>{" "}
         Rating / Price range
       </p>
-      <Row className="row row-cols-3">
-        <Col className="flex-y-center gap-3">
+      <Row className="row-cols-1 row-cols-lg-3 gap-5 gap-lg-0 mt-5">
+        <Col className="d-flex flex-column align-items-lg-center flex-lg-row order-3 order-lg-0 gap-2">
           <Button
             disabled={!statusfilterBtn}
             className="flex-center gap-3 flex-grow-1 flex-lg-grow-0"
@@ -77,7 +77,7 @@ const FilterBar = ({
           />
         </Col>
 
-        <Col className="d-flex gap-2 align-items-center justify-content-end">
+        <Col className="d-flex gap-2 align-items-center justify-content-center justify-content-lg-end order-1 order-lg-0">
           <span className="fs-2">{rating} rate</span>
           <Rating
             onClick={handleRating}

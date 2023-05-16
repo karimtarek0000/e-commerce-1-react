@@ -34,9 +34,9 @@ function Categories() {
 
   return (
     <Container>
-      <h1 className="text-center my-5">{name}</h1>
+      <h1 className="text-center my-5 fs-1 text-capitalize">{name}</h1>
 
-      <FilterBar setFilter={setFilter} />
+      {products.length ? <FilterBar setFilter={setFilter} /> : null}
 
       <ResponsivePagination
         current={currentPage}
@@ -45,6 +45,7 @@ function Categories() {
       />
 
       <NoData loading={loading} data={products} title="No there any products" />
+
       <div className="grid-cards my-5">
         {loading ? (
           <SkeletonLoader>
