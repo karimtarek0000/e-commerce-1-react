@@ -41,6 +41,7 @@ function ProductCard({
               allowFraction={true}
               readonly
             />
+            <span className="fs-2 mx-2 mt-1">{ratingsAverage}</span>
           </div>
 
           <div className="mt-3">

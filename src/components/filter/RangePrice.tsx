@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { useState } from "react";
 
 const sx = {
   color: "#0C6DFD",
@@ -13,31 +12,36 @@ const sx = {
   },
 };
 
-const marks = [
-  {
-    value: 2000,
-    label: "2000 $",
-  },
-  {
-    value: 6000,
-    label: "6000 $",
-  },
-];
+type PropsRange = {
+  min: number;
+  max: number;
+  value: number[];
+  handleChange: any;
+};
 
-export default function RangeSlider(): JSX.Element {
-  const [value, setValue] = useState<number[]>([2000, 6000]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
+export default function RangeSlider({
+  min,
+  max,
+  value,
+  handleChange,
+}: PropsRange): JSX.Element {
+  const marks = [
+    {
+      value: min,
+      label: `${min} $`,
+    },
+    {
+      value: max,
+      label: `${max} $`,
+    },
+  ];
 
   return (
     <Box sx={{ width: 300 }}>
       <Slider
-        aria-label="Always visible"
         sx={sx}
-        max={6000}
-        min={2000}
+        min={min}
+        max={max}
         marks={marks}
         value={value}
         step={100}

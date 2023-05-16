@@ -8,13 +8,13 @@ import { AllProductsType } from "../types/store";
 export const getAllProducts = createAsyncThunk(
   "products/getAllProductsWithCategoryID",
   async (
-    body: { categoryId: string; numPage: number },
+    body: { categoryId: string; numPage: number; filter?: string },
     thunkAPI
   ): Promise<object> => {
-    const { categoryId, numPage } = body;
+    const { categoryId, numPage, filter } = body;
     const { rejectWithValue } = thunkAPI;
     try {
-      const url = `${process.env.REACT_APP_VERSION}/products?category=${categoryId}&limit=10&page=${numPage}`;
+      const url = `${process.env.REACT_APP_VERSION}/products?category=${categoryId}&limit=10&page=${numPage}${filter}`;
       const { data } = await axios.get(url);
 
       return {

@@ -14,6 +14,7 @@ import FilterBar from "../../components/filter/Filterbar";
 
 function Categories() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filter, setFilter] = useState<string>("");
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const { id, name } = useParams();
   const { loading, products, total } = useSelector(
@@ -23,9 +24,9 @@ function Categories() {
 
   useEffect(() => {
     dispatch(
-      getAllProducts({ categoryId: id as string, numPage: currentPage })
+      getAllProducts({ categoryId: id as string, numPage: currentPage, filter })
     );
-  }, [dispatch, id, currentPage]);
+  }, [dispatch, id, currentPage, filter]);
 
   const cards = products.map((prod) => (
     <ProductCard key={prod._id} {...prod} />
@@ -34,7 +35,8 @@ function Categories() {
   return (
     <Container>
       <h1 className="text-center my-5">{name}</h1>
-      <FilterBar />
+
+      <FilterBar setFilter={setFilter} />
 
       <ResponsivePagination
         current={currentPage}
