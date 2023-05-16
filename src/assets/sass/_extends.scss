@@ -24,9 +24,14 @@ a,
   @extend .d-flex, .align-items-center, .justify-content-center;
 }
 
-// Center vertically and end horizontally with flex
+// Center vertically and horizontally with flex
 .flex-end-center {
   @extend .d-flex, .align-items-center, .justify-content-end;
+}
+
+// Center vertivally
+.flex-y-center {
+  @extend .d-flex, .align-items-center;
 }
 
 // Badge for numbers

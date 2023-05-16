@@ -12,6 +12,7 @@ const FilterBar = ({
   const [rating, setRating] = useState<number>(0);
   const [price, setPrice] = useState<[number, number]>([200, 4000]);
   const [statusfilterBtn, setStatusFilterBtn] = useState<boolean>(false);
+  const [statusFilter, setStatusFilter] = useState<boolean>(false);
 
   // Handlers
   const handleChange = (event: Event, newValue: number | number[]): void => {
@@ -22,13 +23,20 @@ const FilterBar = ({
     setStatusFilterBtn(true);
     setRating(rate);
   };
-
   const filterHandler: MouseEventHandler = (): void => {
     const queres: string[] = [];
     rating > 1 && queres.push(`&ratingsAverage[lte]=${rating}`);
     queres.push(`&price[gte]=${price[0]}&price[lte]=${price[1]}`);
     const filter = queres.join("");
+    setStatusFilter(true);
     setFilter(filter);
+  };
+  const resetFilterHandler: MouseEventHandler = () => {
+    setRating(0);
+    setPrice([200, 4000]);
+    setFilter("");
+    setStatusFilter(false);
+    setStatusFilterBtn(false);
   };
 
   return (
@@ -38,17 +46,26 @@ const FilterBar = ({
         Rating / Price range
       </p>
       <Row className="row row-cols-3">
-        <Col>
+        <Col className="flex-y-center gap-3">
           <Button
             disabled={!statusfilterBtn}
             className="flex-center gap-3 flex-grow-1 flex-lg-grow-0"
             variant="primary"
-            type="submit"
             onClick={filterHandler}
           >
             Filter
             <RenderSVG name="filter" size="2rem" />
           </Button>
+          {statusFilter && (
+            <Button
+              className="flex-center gap-3 flex-grow-1 flex-lg-grow-0 text-capitalize"
+              onClick={resetFilterHandler}
+              variant="danger"
+            >
+              clear filter
+              <RenderSVG name="remove" size="1.6rem" />
+            </Button>
+          )}
         </Col>
 
         <Col className="d-flex justify-content-center">
