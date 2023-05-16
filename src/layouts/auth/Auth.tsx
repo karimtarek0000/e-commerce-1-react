@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router";
 import Logo from "../../components/logo/Logo";
+import guard from "../../gurad/gurad";
 
 function Auth(): JSX.Element {
   return (
@@ -33,4 +34,4 @@ function Auth(): JSX.Element {
   );
 }
 
-export default Auth;
+export default guard(Auth, "auth");
