@@ -34,6 +34,8 @@ export const addToCart = createAsyncThunk(
   }
 );
 
+// remove - update count
+
 const initialState: {
   products: ProductCart[];
   loading: boolean;

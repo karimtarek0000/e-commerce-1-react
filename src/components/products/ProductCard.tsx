@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import { ProductCardType } from "../../types";
 import ActionBtn from "../buttons/ActionBtn";
 import RenderSVG from "../svg/RenderSVG";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
-import { addToCart, getCart } from "../../store/cart";
+import { addToCart } from "../../store/cart";
+import useAuth from "../../hooks/useAuth";
 
 function ProductCard({
   _id: id,
@@ -22,11 +23,19 @@ function ProductCard({
 }: ProductCardType): JSX.Element {
   const distpatch = useDispatch<ThunkDispatch<any, any, any>>();
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const isAuth = useAuth();
 
   const addToCartHandler = async (
     e: ChangeEvent<EventTarget>
   ): Promise<void> => {
     e.preventDefault();
+
+    if (!isAuth) {
+      navigate("/auth", { replace: true });
+      toast.error("You must be logged in first 👋");
+      return;
+    }
 
     try {
       setLoading(true);
