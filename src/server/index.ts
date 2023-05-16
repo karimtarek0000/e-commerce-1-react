@@ -4,9 +4,9 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 axios.interceptors.request.use(
   (req: InternalAxiosRequestConfig<any>) => {
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem("token") as string);
 
-    if (token) req.headers.token = token;
+    if (token) req.headers["token"] = token;
 
     return req;
   },

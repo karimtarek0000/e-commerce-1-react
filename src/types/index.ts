@@ -1,3 +1,5 @@
+import { ProductCart } from "./store";
+
 // Auth
 export type Login = {
   email: string;
@@ -33,6 +35,15 @@ export type RootStateProducts = {
     loading: boolean;
     products: Array<ProductCardType>;
     total: number;
+  };
+};
+
+export type RootStateCart = {
+  cart: {
+    loading: boolean;
+    products: ProductCart[];
+    totalCartPrice: number;
+    numOfCartItems: number;
   };
 };
 

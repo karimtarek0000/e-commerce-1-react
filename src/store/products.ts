@@ -40,6 +40,7 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      // All products
       .addCase(getAllProducts.pending, (state) => {
         state.loading = true;
       })

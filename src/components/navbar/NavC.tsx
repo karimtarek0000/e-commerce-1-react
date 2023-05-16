@@ -1,19 +1,31 @@
 import { Container, Form, Nav, Navbar } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootStateAuth } from "../../types";
+import { RootStateAuth, RootStateCart } from "../../types";
 import AuthLinks from "../authLinks/AuthLinks";
 import Cart from "../cart/Cart";
 import Favorit from "../favorit/Favorit";
 import Logo from "../logo/Logo";
 import Profile from "../profile/Profile";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { useCallback, useEffect } from "react";
+import { getCart } from "../../store/cart";
 
 function NavC(): JSX.Element {
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const { loggedIn, token, user } = useSelector(
     (state: RootStateAuth) => state.auth
   );
+  const { numOfCartItems } = useSelector((state: RootStateCart) => state.cart);
 
-  const statusAuth: Function = (): boolean => !!(loggedIn && token && user);
+  const statusAuth: Function = useCallback(
+    (): boolean => !!(loggedIn && token && user),
+    [token, loggedIn, user]
+  );
+
+  useEffect(() => {
+    if (statusAuth()) dispatch(getCart());
+  }, [dispatch, statusAuth]);
 
   return (
     <Navbar className="shadow" bg="light" expand="lg">
@@ -45,7 +57,7 @@ function NavC(): JSX.Element {
               <div className="flex-center">
                 <Profile />
                 <div className="mx-5">
-                  <Cart />
+                  <Cart count={numOfCartItems} />
                 </div>
                 <Favorit />
               </div>
