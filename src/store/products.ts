@@ -2,19 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { ProductCardType } from "../types";
-import { AllProductsType } from "../types/store";
+import { AllProductsType, Products } from "../types/store";
 
 // Get products with categorie id
 export const getAllProducts = createAsyncThunk(
   "products/getAllProductsWithCategoryID",
-  async (
-    body: { categoryId: string; numPage: number; filter?: string },
-    thunkAPI
-  ): Promise<object> => {
-    const { categoryId, numPage, filter } = body;
+  async (body: Products, thunkAPI): Promise<object> => {
+    const { id, type, numPage, filter } = body;
     const { rejectWithValue } = thunkAPI;
     try {
-      const url = `${process.env.REACT_APP_VERSION}/products?category=${categoryId}&limit=10&page=${numPage}${filter}`;
+      const url = `${process.env.REACT_APP_VERSION}/products?${type}=${id}&limit=10&page=${numPage}${filter}`;
       const { data } = await axios.get(url);
 
       return {

@@ -18,7 +18,7 @@ function BrandsList(): JSX.Element {
   }, [dispatch]);
 
   let cards = brands.map((brand) => (
-    <CategorieCard key={brand._id} {...brand} type="brands" />
+    <CategorieCard key={brand._id} {...brand} type="brand" />
   ));
 
   return (

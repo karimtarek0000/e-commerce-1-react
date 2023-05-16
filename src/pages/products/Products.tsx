@@ -12,11 +12,11 @@ import { getAllProducts } from "../../store/products";
 import { RootStateProducts } from "../../types";
 import FilterBar from "../../components/filter/Filterbar";
 
-function Categories() {
+function Products() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<string>("");
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const { id, name } = useParams();
+  const { id, type, name } = useParams();
   const { loading, products, total } = useSelector(
     (state: RootStateProducts) => state.products
   );
@@ -24,9 +24,14 @@ function Categories() {
 
   useEffect(() => {
     dispatch(
-      getAllProducts({ categoryId: id as string, numPage: currentPage, filter })
+      getAllProducts({
+        id: id as string,
+        type: type as string,
+        numPage: currentPage,
+        filter,
+      })
     );
-  }, [dispatch, id, currentPage, filter]);
+  }, [dispatch, id, currentPage, filter, type]);
 
   const cards = products.map((prod) => (
     <ProductCard key={prod._id} {...prod} />
@@ -34,7 +39,7 @@ function Categories() {
 
   return (
     <Container>
-      <h1 className="text-center my-5 fs-1 text-capitalize">{name}</h1>
+      <h1 className="text-center my-5 fs-1 text-capitalize fw-bold">{name}</h1>
 
       {products.length ? <FilterBar setFilter={setFilter} /> : null}
 
@@ -65,4 +70,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default Products;

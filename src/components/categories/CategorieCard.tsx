@@ -9,10 +9,10 @@ function CategorieCard({
   type,
 }: CategorieCardTypes): JSX.Element {
   return (
-    <Link to={`/${type}/${slug}/${id}`} className="col category-card">
+    <Link to={`products/${type}/${slug}/${id}`} className="col category-card">
       <img src={image} alt={name} loading="lazy" />
       <h3 className="category-card__title">
-        {type === "categories" ? name : ""}
+        {type === "category" ? name : ""}
       </h3>
     </Link>
   );

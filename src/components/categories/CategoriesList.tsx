@@ -18,7 +18,7 @@ function CategoriesList(): JSX.Element {
   }, [dispatch]);
 
   let cards = categories.map((categ) => (
-    <CategorieCard key={categ._id} {...categ} type="categories" />
+    <CategorieCard key={categ._id} {...categ} type="category" />
   ));
 
   return (
