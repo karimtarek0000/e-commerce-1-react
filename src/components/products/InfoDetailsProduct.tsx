@@ -2,18 +2,21 @@ import { Col } from "react-bootstrap";
 import { ProductCardType } from "../../types";
 import Price from "./Price";
 import RatingProduct from "./RatingProduct";
-import { PropsWithChildren } from "react";
+import AddToCart from "./AddToCart";
 
-type DetailsProduct = PropsWithChildren<{
+type DetailsProduct = {
   product: ProductCardType;
-}>;
+};
 
-const InfoDetailsProduct = ({
-  product,
-  children,
-}: DetailsProduct): JSX.Element => {
-  const { title, description, ratingsAverage, priceAfterDiscount, price } =
-    product;
+const InfoDetailsProduct = ({ product }: DetailsProduct): JSX.Element => {
+  const {
+    _id: id,
+    title,
+    description,
+    ratingsAverage,
+    priceAfterDiscount,
+    price,
+  } = product;
 
   return (
     <Col className="order-1 order-md-2">
@@ -27,7 +30,7 @@ const InfoDetailsProduct = ({
 
       <Price price={price} afterDiscount={priceAfterDiscount} />
 
-      {children}
+      <AddToCart className="mt-3" productId={id} />
     </Col>
   );
 };

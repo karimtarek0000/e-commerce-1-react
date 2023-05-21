@@ -8,7 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-const AddToCard = ({ productId }: { productId: string }): JSX.Element => {
+type AddToCartTypes = {
+  productId: string;
+  className?: string;
+};
+
+const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
   const distpatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
@@ -37,13 +42,13 @@ const AddToCard = ({ productId }: { productId: string }): JSX.Element => {
   };
 
   return (
-    <div className="mt-3">
+    <div className={className}>
       <ActionBtn action={addToCartHandler} loading={loading} disabled={false}>
         <RenderSVG name="favorit" size="1.6rem" style={{ fill: "white" }} />
-        Add to favorit
+        Add to Cart
       </ActionBtn>
     </div>
   );
 };
 
-export default AddToCard;
+export default AddToCart;
