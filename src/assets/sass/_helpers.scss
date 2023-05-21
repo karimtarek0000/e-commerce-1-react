@@ -17,3 +17,12 @@
 .truncate-head {
   @include truncate(1);
 }
+.unctive-outline {
+  outline: 1px solid #585858;
+}
+.active-outline {
+  outline: 2px solid #000000;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

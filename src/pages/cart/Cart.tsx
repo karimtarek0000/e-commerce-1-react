@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { RootStateCart } from "../../types";
+// import { useSelector } from "react-redux";
+// import { RootStateCart } from "../../types";
 
 function Cart() {
   // const { products } = useSelector((state: RootStateCart) => state.cart);

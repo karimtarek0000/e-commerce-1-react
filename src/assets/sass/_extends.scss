@@ -29,6 +29,11 @@ a,
   @extend .d-flex, .align-items-center, .justify-content-end;
 }
 
+// Center vertically and horizontally with flex
+.flex-start-center {
+  @extend .d-flex, .align-items-center, .justify-content-start;
+}
+
 // Center vertivally
 .flex-y-center {
   @extend .d-flex, .align-items-center;

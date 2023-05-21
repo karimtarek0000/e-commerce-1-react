@@ -9,6 +9,8 @@ import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { addToCart } from "../../store/cart";
 import useAuth from "../../hooks/useAuth";
+import Price from "./Price";
+import RatingProduct from "./RatingProduct";
 
 function ProductCard({
   _id: id,
@@ -49,7 +51,7 @@ function ProductCard({
   };
 
   return (
-    <Link to="/" className="col text-dark td-none">
+    <Link to={`/product/${id}`} className="col text-dark td-none">
       <div className="border rounded overflow-hidden">
         <img
           src={imageCover}
@@ -61,22 +63,9 @@ function ProductCard({
           <h4 className="fs-2 text-capitalize truncate-head">{title}</h4>
           <p className="fs-4 truncate-par h-72 p-0">{description}</p>
 
-          <div className="flex-center fs-4 gap-4">
-            <span className="fw-bold fs-2">
-              ${priceAfterDiscount ? priceAfterDiscount : price}
-            </span>
-            {priceAfterDiscount && <span className="td-through">${price}</span>}
-          </div>
+          <Price price={price} afterDiscount={priceAfterDiscount} />
 
-          <div className="flex-center mt-3">
-            <Rating
-              initialValue={ratingsAverage}
-              size={25}
-              allowFraction={true}
-              readonly
-            />
-            <span className="fs-2 mx-2 mt-1">{ratingsAverage}</span>
-          </div>
+          <RatingProduct className="flex-center mt-3" rating={ratingsAverage} />
 
           <div className="mt-3">
             <ActionBtn

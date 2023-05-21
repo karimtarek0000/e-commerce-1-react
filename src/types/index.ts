@@ -22,6 +22,7 @@ export type ProductCardType = {
   _id: string;
   name: string;
   title: string;
+  images: string[];
   imageCover: string;
   price: number;
   priceAfterDiscount: number;
@@ -35,6 +36,7 @@ export type RootStateProducts = {
     loading: boolean;
     products: Array<ProductCardType>;
     total: number;
+    product: ProductCardType;
   };
 };
 

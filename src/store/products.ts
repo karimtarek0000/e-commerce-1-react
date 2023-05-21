@@ -24,13 +24,31 @@ export const getAllProducts = createAsyncThunk(
   }
 );
 
+// Get product with id
+export const getProduct = createAsyncThunk(
+  "products/getProduct",
+  async (id: string, thunkAPI): Promise<object> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/products/${id}`;
+      const { data } = await axios.get(url);
+
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string);
+    }
+  }
+);
+
 const initialState: {
   loading: boolean;
   products: Array<ProductCardType>;
+  product: ProductCardType | {};
   total: number;
 } = {
   loading: false,
   products: [],
+  product: {},
   total: 0,
 };
 
@@ -53,6 +71,21 @@ const productsSlice = createSlice({
         }
       )
       .addCase(getAllProducts.rejected, (state) => {
+        state.loading = false;
+        toast.error("Error please try again!");
+      })
+      // Get Product
+      .addCase(getProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(
+        getProduct.fulfilled,
+        (state, { payload }: { payload: ProductCardType | any }) => {
+          state.loading = false;
+          state.product = payload;
+        }
+      )
+      .addCase(getProduct.rejected, (state) => {
         state.loading = false;
         toast.error("Error please try again!");
       });
