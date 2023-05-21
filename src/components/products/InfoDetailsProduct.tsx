@@ -30,7 +30,7 @@ const InfoDetailsProduct = ({ product }: DetailsProduct): JSX.Element => {
 
       <Price price={price} afterDiscount={priceAfterDiscount} />
 
-      <AddToCart className="mt-3" productId={id} />
+      <AddToCart className="mt-3 mb-5" productId={id} />
     </Col>
   );
 };
