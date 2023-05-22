@@ -1,16 +1,10 @@
 import { createBrowserRouter, RouterProviderProps } from "react-router-dom";
 import Auth from "../layouts/auth/Auth";
 import Dashboard from "../layouts/dashboard/Dashboard";
-import NotFound from "../pages/404/NotFound";
-import ForgetPassword from "../pages/auth/ForgetPassword";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
-import Cart from "../pages/cart/Cart";
-import Favorites from "../pages/favorites/Favorites";
 import Home from "../pages/home/Home";
-import ProductDetails from "../pages/productDetails/ProductDetails";
-import Products from "../pages/products/Products";
-// import { lazyLoadRoutes } from "./lazy";
+import { lazyLoadRoutes } from "./lazy";
 
 const router = createBrowserRouter([
   {
@@ -23,19 +17,19 @@ const router = createBrowserRouter([
       },
       {
         path: "products/:type/:name/:id",
-        element: <Products />,
+        element: lazyLoadRoutes("products/Products"),
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: lazyLoadRoutes("cart/Cart"),
       },
       {
         path: "favorites",
-        element: <Favorites />,
+        element: lazyLoadRoutes("favorites/Favorites"),
       },
       {
         path: "product/:id",
-        element: <ProductDetails />,
+        element: lazyLoadRoutes("productDetails/ProductDetails"),
       },
     ],
   },
@@ -53,13 +47,13 @@ const router = createBrowserRouter([
       },
       {
         path: "forget-password",
-        element: <ForgetPassword />,
+        element: lazyLoadRoutes("auth/ForgetPassword"),
       },
     ],
   },
   {
     path: "*",
-    element: <NotFound />,
+    element: lazyLoadRoutes("404/NotFound"),
   },
 ]);
 
