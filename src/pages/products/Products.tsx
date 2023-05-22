@@ -38,7 +38,7 @@ function Products() {
   ));
 
   return (
-    <Container>
+    <Container style={{ minHeight: "70vh" }}>
       <h1 className="text-center my-5 fs-1 text-capitalize fw-bold">{name}</h1>
 
       {products.length ? <FilterBar setFilter={setFilter} /> : null}

@@ -26,7 +26,7 @@ const Footer = (): JSX.Element => {
             </div>
           </Col>
           <Col md="4" className="flex-center flex-column">
-            <h2 className="mb-4 fs-2">Payment method</h2>
+            <h2 className="mb-4 fs-2">Payment methods</h2>
             <div className="flex-center gap-4">
               <RenderSVG name="visa" size="4rem" />
               <RenderSVG name="cashe" size="4rem" />
