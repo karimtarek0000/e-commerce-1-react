@@ -1,0 +1,21 @@
+.carousel-item {
+  & .slide-label,
+  & .slide-desc {
+    opacity: 0;
+    transition: all 1s ease-in-out;
+  }
+  & .slide-label {
+    transform: translateY(30px);
+  }
+  & .slide-desc {
+    transform: translateY(40px);
+  }
+}
+
+.active.carousel-item {
+  & .slide-label,
+  & .slide-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

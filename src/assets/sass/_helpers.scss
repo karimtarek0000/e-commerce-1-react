@@ -26,3 +26,11 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.overlay-img {
+  @extend .position-absolute, .w-100, .h-100, .top-0, .start-0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.4)
+  );
+}

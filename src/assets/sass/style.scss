@@ -5,6 +5,7 @@
 @import "./_extends";
 @import "./_helpers";
 @import "./_card";
+@import "./_slider";
 
 html {
   font-size: map-get($font-base, normal);

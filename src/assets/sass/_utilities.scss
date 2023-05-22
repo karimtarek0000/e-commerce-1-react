@@ -9,6 +9,7 @@ $utilities: (
       100: 100%,
       72: 7.2rem,
       1vh: 100vh,
+      slide: calc(100vh - 8rem),
       auto: auto,
     ),
   ),
@@ -35,6 +36,14 @@ $utilities: (
     values: (
       100: 100%,
       25p: 25rem,
+    ),
+  ),
+  "max-width": (
+    property: max-width,
+    responsive: true,
+    class: maxw,
+    values: (
+      50p: 50%,
     ),
   ),
 );

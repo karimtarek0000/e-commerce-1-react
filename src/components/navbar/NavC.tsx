@@ -22,7 +22,7 @@ function NavC(): JSX.Element {
   }, [isAuth, dispatch]);
 
   return (
-    <Navbar className="shadow" bg="light" expand="lg">
+    <Navbar className="shadow" sticky="top" bg="light" expand="lg">
       <Container>
         {/* Logo */}
         <Navbar.Brand as={Link} to="/">
