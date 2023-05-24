@@ -1,6 +1,7 @@
 $utilities: (
   "height": (
     property: height,
+    responsive: true,
     class: h,
     values: (
       25: 25%,
@@ -10,6 +11,7 @@ $utilities: (
       72: 7.2rem,
       1vh: 100vh,
       slide: calc(100vh - 8rem),
+      150: 15rem,
       auto: auto,
     ),
   ),
