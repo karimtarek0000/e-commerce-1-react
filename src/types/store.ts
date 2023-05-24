@@ -14,11 +14,14 @@ export type Products = {
 
 export type AddToCart = {
   message: string;
+  data: PayloadGetCart;
+  numOfCartItems: number;
 };
 
 export type ProductCart = {
   _id: string;
   count: number;
+  price: number;
   product: {
     _id: string;
     id: string;
@@ -26,5 +29,15 @@ export type ProductCart = {
     quantity: number;
     imageCover: string;
     ratingsAverage: number;
+    brand: {
+      name: string;
+      slug: string;
+      _id: string;
+    };
+    category: {
+      name: string;
+      slug: string;
+      _id: string;
+    };
   };
 };

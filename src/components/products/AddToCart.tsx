@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
-import { addToCart } from "../../store/cart";
+import { addToCart, getCart } from "../../store/cart";
 import ActionBtn from "../buttons/ActionBtn";
 import RenderSVG from "../svg/RenderSVG";
 import useAuth from "../../hooks/useAuth";
@@ -33,6 +33,8 @@ const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
     try {
       setLoading(true);
       const { message } = await distpatch(addToCart(productId)).unwrap();
+      await distpatch(getCart()).unwrap();
+
       toast.success(`${message} 👋`);
     } catch (error) {
       toast.error(`${error}`);

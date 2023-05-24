@@ -28,7 +28,11 @@ function ProductCard({
           <h4 className="fs-2 text-capitalize truncate-head">{title}</h4>
           <p className="fs-4 truncate-par h-72 p-0">{description}</p>
 
-          <Price price={price} afterDiscount={priceAfterDiscount} />
+          <Price
+            className="flex-center"
+            price={price}
+            afterDiscount={priceAfterDiscount}
+          />
 
           <RatingProduct className="flex-center mt-3" rating={ratingsAverage} />
 

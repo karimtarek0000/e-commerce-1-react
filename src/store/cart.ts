@@ -34,7 +34,21 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-// remove - update count
+// Remove product from cart
+export const removeProduct = createAsyncThunk(
+  "cart/removeProduct",
+  async (id: string, thunkAPI): Promise<object> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/cart/${id}`;
+      const { data } = await axios.delete(url);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string) as never;
+    }
+  }
+);
 
 const initialState: {
   products: ProductCart[];
@@ -51,20 +65,28 @@ const initialState: {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder.addCase(getCart.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(getCart.fulfilled, (state, { payload }) => {
+  reducers: {
+    addToProductToCart(state, { payload }: { payload: PayloadGetCart }) {
       const { data, numOfCartItems } = payload as PayloadGetCart;
       state.numOfCartItems = numOfCartItems;
       state.products = data.products;
       state.totalCartPrice = data.totalCartPrice;
       state.loading = false;
-    });
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getCart.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCart.fulfilled, (state, { payload }) => {
+        cartSlice.caseReducers.addToProductToCart(state, { payload } as any);
+      })
+      .addCase(removeProduct.fulfilled, (state, { payload }) => {
+        cartSlice.caseReducers.addToProductToCart(state, { payload } as any);
+      });
   },
 });
 
-// export const { setLogOut } = authSlice.actions;
+// export const { } = cartSlice.actions;
 export default cartSlice.reducer;

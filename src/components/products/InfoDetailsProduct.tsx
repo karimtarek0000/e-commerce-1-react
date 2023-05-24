@@ -28,7 +28,11 @@ const InfoDetailsProduct = ({ product }: DetailsProduct): JSX.Element => {
         rating={ratingsAverage}
       />
 
-      <Price price={price} afterDiscount={priceAfterDiscount} />
+      <Price
+        className="flex-start-center"
+        price={price}
+        afterDiscount={priceAfterDiscount}
+      />
 
       <AddToCart className="mt-3 mb-5" productId={id} />
     </Col>
