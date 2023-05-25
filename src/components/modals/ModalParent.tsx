@@ -24,7 +24,7 @@ const ModalParent = (props: any): JSX.Element => {
         {props.confirm && (
           <Button
             disabled={props.loading}
-            onClick={props.onConfirm}
+            onClick={() => props.onConfirm()}
             variant="danger"
           >
             Confirm

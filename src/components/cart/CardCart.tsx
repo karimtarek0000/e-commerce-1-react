@@ -102,21 +102,21 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           Delete
           <RenderSVG name="remove" size="1.7rem" />
         </Button>
-
-        {/* Modal for delete a product */}
-        <ModalParent
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          onConfirm={deleteItemHandler}
-          confirm="true"
-          loading={loading}
-          title="Delete product"
-        >
-          <h2 className="fs-3">
-            Are you sure for delete a product from cart page ?
-          </h2>
-        </ModalParent>
       </Col>
+
+      {/* Modal for delete a product */}
+      <ModalParent
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        confirm="true"
+        onConfirm={deleteItemHandler}
+        loading={loading}
+        title="Delete a product"
+      >
+        <h2 className="fs-3">
+          Are you sure for delete a product from cart page ?
+        </h2>
+      </ModalParent>
     </Row>
   );
 };
