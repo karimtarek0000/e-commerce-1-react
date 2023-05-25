@@ -4,10 +4,11 @@ import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct } from "../../store/cart";
+import ModalParent from "../modals/ModalParent";
 
 type CardCartType = {
   productCard: ProductCart;
@@ -18,12 +19,16 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
     price,
     product: { id, title, imageCover, ratingsAverage, brand, category },
   } = productCard;
+  const [modalShow, setModalShow] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
-
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
-  const deleteItemHandler = async () => {
+  const deleteItemHandler = async (): Promise<void> => {
+    setLoading(true);
     await dispatch(removeProduct(id)).unwrap();
+    setLoading(false);
+    setModalShow(false);
   };
 
   return (
@@ -92,11 +97,25 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           className="flex-center my-3 py-3 w-100 gap-3"
           variant="danger"
           type="submit"
-          onClick={deleteItemHandler}
+          onClick={() => setModalShow(true)}
         >
           Delete
           <RenderSVG name="remove" size="1.7rem" />
         </Button>
+
+        {/* Modal for delete a product */}
+        <ModalParent
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          onConfirm={deleteItemHandler}
+          confirm="true"
+          loading={loading}
+          title="Delete product"
+        >
+          <h2 className="fs-3">
+            Are you sure for delete a product from cart page ?
+          </h2>
+        </ModalParent>
       </Col>
     </Row>
   );
