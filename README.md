@@ -2,3 +2,5 @@
 
 - Redux-toolkit
 - Formik
+- Guard with (HOF)
+- Bootstrap and react-bootstrap
