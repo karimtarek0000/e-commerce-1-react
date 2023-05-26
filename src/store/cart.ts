@@ -75,11 +75,13 @@ const initialState: {
   loading: boolean;
   totalCartPrice: number;
   numOfCartItems: number;
+  idsInCart: string[];
 } = {
   products: [],
   loading: false,
   totalCartPrice: 0,
   numOfCartItems: 0,
+  idsInCart: [],
 };
 
 const cartSlice = createSlice({
@@ -90,6 +92,7 @@ const cartSlice = createSlice({
       const { data, numOfCartItems } = payload;
       state.numOfCartItems = numOfCartItems;
       state.products = data.products.reverse();
+      state.idsInCart = data.products.map((product) => product.product._id);
       state.totalCartPrice = data.totalCartPrice;
       state.loading = false;
     },

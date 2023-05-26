@@ -75,7 +75,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           <Col className="d-flex justify-content-center justify-content-md-start align-items-center gap-3">
             <Price price={price} />-
             <h4 className="text-capitalize fs-4 mt-1">
-              avaliable quantity:{" "}
+              available quantity:{" "}
               <span className="bg-primary px-2 py-1 text-white rounded">
                 {_quantity}
               </span>

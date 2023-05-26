@@ -46,6 +46,7 @@ export type RootStateCart = {
     products: ProductCart[];
     totalCartPrice: number;
     numOfCartItems: number;
+    idsInCart: string[];
   };
 };
 

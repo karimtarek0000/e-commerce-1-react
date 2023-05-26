@@ -15,6 +15,7 @@ function ActionBtn({
 }: ActionBtnType): JSX.Element {
   return (
     <Button
+      style={{ height: "40px" }}
       className="flex-center gap-2 w-100"
       onClick={(e) => action(e)}
       disabled={disabled}

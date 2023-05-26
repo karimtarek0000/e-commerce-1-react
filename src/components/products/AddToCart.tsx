@@ -6,7 +6,8 @@ import RenderSVG from "../svg/RenderSVG";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateCart } from "../../types";
 
 type AddToCartTypes = {
   productId: string;
@@ -14,10 +15,14 @@ type AddToCartTypes = {
 };
 
 const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
+  const { idsInCart } = useSelector((state: RootStateCart) => state.cart);
   const [loading, setLoading] = useState<boolean>(false);
   const distpatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
   const isAuth = useAuth();
+
+  const ifIdIncluded = (): boolean => idsInCart.includes(productId);
+  const ifProductExistCart = ifIdIncluded();
 
   const addToCartHandler = async (
     e: ChangeEvent<EventTarget>
@@ -45,9 +50,17 @@ const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
 
   return (
     <div className={className}>
-      <ActionBtn action={addToCartHandler} loading={loading} disabled={false}>
-        <RenderSVG name="favorit" size="1.6rem" style={{ fill: "white" }} />
-        Add to Cart
+      <ActionBtn
+        action={addToCartHandler}
+        loading={loading}
+        disabled={ifProductExistCart}
+      >
+        <RenderSVG
+          name={ifProductExistCart ? "added-favorit" : "favorit"}
+          size="1.6rem"
+          style={{ fill: "white" }}
+        />
+        {ifProductExistCart ? "in cart" : "Add to Cart"}
       </ActionBtn>
     </div>
   );
