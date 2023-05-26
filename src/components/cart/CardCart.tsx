@@ -37,6 +37,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
   const deleteItemHandler = async (): Promise<void> => {
     setLoading(true);
     await dispatch(removeProduct(id)).unwrap();
+    toast.success("Product deleted successfully");
     setLoading(false);
     setModalShow(false);
   };

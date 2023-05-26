@@ -30,7 +30,7 @@ const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
     e.preventDefault();
 
     if (!isAuth) {
-      navigate("/auth", { replace: true });
+      navigate(`/auth?fallback=${productId}`, { replace: true });
       toast.error("You must be logged in first 👋");
       return;
     }
