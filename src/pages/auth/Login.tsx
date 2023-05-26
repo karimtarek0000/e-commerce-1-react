@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { Form } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import { login } from "../../store/auth";
 import { Login, RootStateAuth } from "../../types";
+import useQuery from "../../hooks/useQuery";
 
 const validationSchema: object = Yup.object().shape({
   email: Yup.string()
@@ -28,7 +29,7 @@ function LogIn(): JSX.Element {
   const { loading } = useSelector((state: RootStateAuth) => state.auth);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
-  const [search] = useSearchParams();
+  const { path, signUpLink } = useQuery();
 
   const initialValues: Login = {
     email: "",
@@ -42,8 +43,6 @@ function LogIn(): JSX.Element {
       try {
         resetForm();
         await dispatch(login(data)).unwrap();
-        const getQuery: string = search.get("fallback") as string;
-        const path: string = getQuery ? `/product/${getQuery}` : "/";
         navigate(path, { replace: true });
         toast.success("Login successfully 👋");
       } catch {
@@ -96,7 +95,7 @@ function LogIn(): JSX.Element {
 
       {/* Go to create a new account */}
       <Link
-        to="/auth/sign-up"
+        to={signUpLink}
         className="d-block link-underline link-underline-opacity-0 mb-4"
       >
         Create new account

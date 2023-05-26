@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import { signUp } from "../../store/auth";
 import { RootStateAuth, SignUpTypes } from "../../types";
+import useQuery from "../../hooks/useQuery";
 
 const validationSchema: object = Yup.object().shape({
   name: Yup.string().required("Please enter name"),
@@ -34,6 +35,7 @@ function SignUp(): JSX.Element {
   const { loading } = useSelector((state: RootStateAuth) => state.auth);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
+  const { path, logInLink } = useQuery();
 
   const initialValues: SignUpTypes = {
     name: "",
@@ -49,7 +51,7 @@ function SignUp(): JSX.Element {
       try {
         resetForm();
         await dispatch(signUp(data)).unwrap();
-        navigate("/", { replace: true });
+        navigate(path, { replace: true });
         toast.success(`Welcome ${data.name} | Register successfully 👋`);
       } catch (error) {
         toast.error(`${error}`);
@@ -138,7 +140,7 @@ function SignUp(): JSX.Element {
       <p className="text-end fs-4">
         You have an account ?
         <Link
-          to="/auth"
+          to={logInLink}
           className="ms-1 link-underline link-underline-opacity-0"
         >
           login
