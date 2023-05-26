@@ -8,8 +8,10 @@ import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct, updateQuantity } from "../../store/cart";
-import ModalParent from "../modals/ModalParent";
 import toast from "react-hot-toast";
+import { Suspense, lazy } from "react";
+
+const ModalParent = lazy(() => import("../modals/ModalParent"));
 
 type CardCartType = {
   productCard: ProductCart;
@@ -138,19 +140,23 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
       </Col>
 
       {/* Modal for delete a product */}
-      <ModalParent
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        confirm="true"
-        onConfirm={deleteItemHandler}
-        loading={loading}
-        title="Delete a Product"
-      >
-        <h2 className="fs-3 fw-normal py-3 text-center">
-          Are sure you want delete <span className="fw-bold">{title}</span> from
-          your cart ?
-        </h2>
-      </ModalParent>
+      <Suspense>
+        {modalShow && (
+          <ModalParent
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            confirm="true"
+            onConfirm={deleteItemHandler}
+            loading={loading}
+            title="Delete a Product"
+          >
+            <h2 className="fs-3 fw-normal py-3 text-center">
+              Are sure you want delete <span className="fw-bold">{title}</span>{" "}
+              from your cart ?
+            </h2>
+          </ModalParent>
+        )}
+      </Suspense>
     </Row>
   );
 };
