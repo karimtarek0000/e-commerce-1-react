@@ -4,11 +4,12 @@ import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { removeProduct } from "../../store/cart";
+import { removeProduct, updateQuantity } from "../../store/cart";
 import ModalParent from "../modals/ModalParent";
+import toast from "react-hot-toast";
 
 type CardCartType = {
   productCard: ProductCart;
@@ -17,6 +18,7 @@ type CardCartType = {
 const CardCart = ({ productCard }: CardCartType): JSX.Element => {
   const {
     price,
+    count,
     product: {
       id,
       title,
@@ -28,7 +30,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
     },
   } = productCard;
   const [modalShow, setModalShow] = useState<boolean>(false);
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(count);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
@@ -39,11 +41,24 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
     setModalShow(false);
   };
 
+  const setQuantityHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+    const newQuantity = Number(e.target.value);
+    if (newQuantity <= _quantity) return setQuantity(newQuantity);
+    toast.error(
+      "You must enter quantity less than or equal available quantity"
+    );
+  };
+
+  const updateQuantityHandler = async (): Promise<void> => {
+    await dispatch(updateQuantity({ productId: id, count: quantity })).unwrap();
+    toast.success("Has been updated quantity successfully");
+  };
+
   return (
     <Row className="border border-dark rounded-3 h-md-150 overflow-hidden mb-4 justify-content-center justify-content-md-between">
       <Col sm="12" md="3" lg="3" className="p-0 maxh-300">
         <img
-          className="img-resize"
+          className="img-resize position-bottom"
           src={imageCover}
           loading="lazy"
           alt={title}
@@ -56,9 +71,14 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
             <h4 className="fs-2 truncate-head mb-2">{title}</h4>
           </Col>
           {/* Price for product */}
-          <Col className="d-flex justify-content-center justify-content-md-start">
-            <Price price={price} />
-            <h4>Avaliable quantity: {_quantity}</h4>
+          <Col className="d-flex justify-content-center justify-content-md-start align-items-center gap-3">
+            <Price price={price} />-
+            <h4 className="text-capitalize fs-4 mt-1">
+              avaliable quantity:{" "}
+              <span className="bg-primary px-2 py-1 text-white rounded">
+                {_quantity}
+              </span>
+            </h4>
           </Col>
           {/* Rating for product */}
           <Col className="d-flex flex-column align-items-center align-items-md-start">
@@ -90,15 +110,17 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
         lg="2"
         className="flex-center h-100 mt-3 mt-md-0 flex-column"
       >
+        <h5>Enter Quantity</h5>
         <input
           type="number"
           value={quantity}
           className="form-control text-center"
-          onChange={(e) => setQuantity(Number(e.target.value))}
+          onChange={setQuantityHandler}
+          onBlur={updateQuantityHandler}
           min={0}
           placeholder="Quantity"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
+          aria-label="quantity"
+          aria-describedby="quantity"
         />
 
         {/*  */}
@@ -120,10 +142,10 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
         confirm="true"
         onConfirm={deleteItemHandler}
         loading={loading}
-        title="Delete a product"
+        title="Delete a Product"
       >
         <h2 className="fs-3">
-          Are you sure for delete a product from cart page ?
+          Are you sure want delete a product from cart page ?
         </h2>
       </ModalParent>
     </Row>

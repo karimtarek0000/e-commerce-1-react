@@ -1,6 +1,6 @@
 import { Modal, Button, Spinner } from "react-bootstrap";
 
-const ModalParent = (props: any): JSX.Element => {
+const ModalParent = ({ onConfirm, loading, ...props }: any): JSX.Element => {
   return (
     <Modal
       size="lg"
@@ -23,12 +23,12 @@ const ModalParent = (props: any): JSX.Element => {
         <Button onClick={props.onHide}>Close</Button>
         {props.confirm && (
           <Button
-            disabled={props.loading}
-            onClick={() => props.onConfirm()}
+            disabled={loading}
+            onClick={() => onConfirm()}
             variant="danger"
           >
             Confirm
-            {props.loading && (
+            {loading && (
               <Spinner className="mx-1" animation="border" variant="light" />
             )}
           </Button>

@@ -8,6 +8,9 @@
   object-position: top;
   @extend .img-fluid, .object-fit-cover, .w-100, .h-100;
 }
+.position-bottom {
+  object-position: bottom;
+}
 .cursor-pointer {
   cursor: pointer;
 }
