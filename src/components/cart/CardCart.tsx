@@ -4,7 +4,7 @@ import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct } from "../../store/cart";
@@ -17,7 +17,15 @@ type CardCartType = {
 const CardCart = ({ productCard }: CardCartType): JSX.Element => {
   const {
     price,
-    product: { id, title, imageCover, ratingsAverage, brand, category },
+    product: {
+      id,
+      title,
+      imageCover,
+      quantity: _quantity,
+      ratingsAverage,
+      brand,
+      category,
+    },
   } = productCard;
   const [modalShow, setModalShow] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
@@ -50,6 +58,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           {/* Price for product */}
           <Col className="d-flex justify-content-center justify-content-md-start">
             <Price price={price} />
+            <h4>Avaliable quantity: {_quantity}</h4>
           </Col>
           {/* Rating for product */}
           <Col className="d-flex flex-column align-items-center align-items-md-start">
