@@ -10,7 +10,10 @@ const ModalParent = ({ onConfirm, loading, ...props }: any): JSX.Element => {
     >
       {/* Header */}
       <Modal.Header closeButton>
-        <Modal.Title className="fs-2" id="contained-modal-title-vcenter">
+        <Modal.Title
+          className="fs-2 w-100 text-center"
+          id="contained-modal-title-vcenter"
+        >
           {props.title}
         </Modal.Title>
       </Modal.Header>

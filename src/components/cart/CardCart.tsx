@@ -4,7 +4,7 @@ import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
 import { Link } from "react-router-dom";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct, updateQuantity } from "../../store/cart";
@@ -43,7 +43,8 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
 
   const setQuantityHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     const newQuantity = Number(e.target.value);
-    if (newQuantity <= _quantity) return setQuantity(newQuantity);
+    if (newQuantity <= _quantity && newQuantity > 0)
+      return setQuantity(newQuantity);
     toast.error(
       "You must enter quantity less than or equal available quantity"
     );
@@ -144,8 +145,9 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
         loading={loading}
         title="Delete a Product"
       >
-        <h2 className="fs-3">
-          Are you sure want delete a product from cart page ?
+        <h2 className="fs-3 fw-normal py-3 text-center">
+          Are sure you want delete <span className="fw-bold">{title}</span> from
+          your cart ?
         </h2>
       </ModalParent>
     </Row>

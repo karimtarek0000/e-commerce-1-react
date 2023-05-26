@@ -89,12 +89,13 @@ const cartSlice = createSlice({
     addToProductToCart(state, { payload }: { payload: PayloadGetCart }) {
       const { data, numOfCartItems } = payload;
       state.numOfCartItems = numOfCartItems;
-      state.products = data.products;
+      state.products = data.products.reverse();
       state.totalCartPrice = data.totalCartPrice;
       state.loading = false;
     },
     errorHandler(state, actions) {
       toast.error(actions.payload as string);
+      state.loading = false;
     },
   },
   extraReducers(builder) {
@@ -114,7 +115,7 @@ const cartSlice = createSlice({
       })
       // Error handling
       .addCase(getCart.rejected, (state, actions) => {
-        cartSlice.caseReducers.errorHandler(state, actions);
+        state.loading = false;
       })
       .addCase(removeProduct.rejected, (state, actions) => {
         cartSlice.caseReducers.errorHandler(state, actions);

@@ -4,8 +4,8 @@ const Category = () => (
   <ContentLoader
     speed={1}
     width={476}
-    height={500}
-    viewBox="0 0 476 500"
+    height={700}
+    viewBox="0 0 476 700"
     backgroundColor="#d6d6d6"
     foregroundColor="#ebebeb"
   >
@@ -18,8 +18,8 @@ const Product = () => {
     <ContentLoader
       speed={1}
       width={315}
-      height={500}
-      viewBox="0 0 315 500"
+      height={700}
+      viewBox="0 0 315 700"
       backgroundColor="#d6d6d6"
       foregroundColor="#ebebeb"
     >
@@ -38,9 +38,9 @@ const ProductDetails = ({ type }: { type?: string }) => {
     return (
       <ContentLoader
         speed={2}
-        width={500}
-        height={500}
-        viewBox="0 0 500 500"
+        width={700}
+        height={700}
+        viewBox="0 0 700 700"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -57,9 +57,9 @@ const ProductDetails = ({ type }: { type?: string }) => {
     return (
       <ContentLoader
         speed={2}
-        width={500}
-        height={500}
-        viewBox="0 0 500 500"
+        width={700}
+        height={700}
+        viewBox="0 0 700 700"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -93,8 +93,51 @@ const ProductDetails = ({ type }: { type?: string }) => {
   );
 };
 
+const CardCart = ({ type }: { type?: "responsive" }) => {
+  if (type === "responsive") {
+    return (
+      <ContentLoader
+        speed={2}
+        width={400}
+        height={400}
+        viewBox="0 0 400 400"
+        backgroundColor="#f4ebeb"
+        foregroundColor="#e5dcdc"
+      >
+        <rect x="8" y="7" rx="0" ry="0" width="368" height="174" />
+        <rect x="564" y="66" rx="0" ry="0" width="141" height="32" />
+        <rect x="564" y="118" rx="0" ry="0" width="142" height="32" />
+        <rect x="7" y="200" rx="0" ry="0" width="372" height="32" />
+        <rect x="58" y="255" rx="0" ry="0" width="257" height="18" />
+        <rect x="58" y="288" rx="0" ry="0" width="257" height="18" />
+        <rect x="57" y="323" rx="0" ry="0" width="257" height="18" />
+        <rect x="58" y="356" rx="0" ry="0" width="257" height="18" />
+      </ContentLoader>
+    );
+  }
+  return (
+    <ContentLoader
+      speed={2}
+      width={1000}
+      height={200}
+      viewBox="0 0 1000 200"
+      backgroundColor="#f4ebeb"
+      foregroundColor="#e5dcdc"
+    >
+      <rect x="9" y="17" rx="0" ry="0" width="250" height="174" />
+      <rect x="289" y="15" rx="0" ry="0" width="700" height="32" />
+      <rect x="291" y="64" rx="0" ry="0" width="700" height="12" />
+      <rect x="291" y="85" rx="0" ry="0" width="700" height="12" />
+      <rect x="290" y="107" rx="0" ry="0" width="700" height="12" />
+      <rect x="290" y="128" rx="0" ry="0" width="700" height="12" />
+      <rect x="290" y="157" rx="0" ry="0" width="700" height="32" />
+    </ContentLoader>
+  );
+};
+
 export const Skeleton = {
   Category,
   Product,
   ProductDetails,
+  CardCart,
 };
