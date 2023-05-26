@@ -1,6 +1,12 @@
-# E-commerce with React - Visit [website](https://e-commerce-1-react.onrender.com/)
+# E-commerce-1 with React-typescript - Visit [website](https://e-commerce-1-react.onrender.com/)
 
+- Typescript
 - Redux-toolkit
 - Formik
+- Routing
 - Guard with (HOF)
-- Bootstrap and react-bootstrap
+- Lazy component and lazy-pages
+- Bootstrap and React-Bootstrap
+- Auth
+- Axios
+- Sass
