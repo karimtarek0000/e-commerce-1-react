@@ -9,7 +9,9 @@ function Dashboard(): JSX.Element {
       <Navbar />
 
       {/* Pages */}
-      <Outlet />
+      <main style={{ minHeight: "70vh" }}>
+        <Outlet />
+      </main>
 
       {/* For scroll */}
       <ScrollRestoration getKey={(location) => location.pathname} />

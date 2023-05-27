@@ -16,7 +16,7 @@ function Cart() {
   });
 
   return (
-    <Container className="px-4 px-lg-0" style={{ minHeight: "70vh" }}>
+    <Container className="px-4 px-lg-0">
       {numOfCartItems > 0 && (
         <Row className="mt-4 justify-content-between">
           <Col cols="3" className="flex-start flex-column">
