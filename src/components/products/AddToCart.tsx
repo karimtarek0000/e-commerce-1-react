@@ -53,7 +53,7 @@ const AddToCart = ({ productId, className }: AddToCartTypes): JSX.Element => {
       <ActionBtn
         action={addToCartHandler}
         loading={loading}
-        disabled={ifProductExistCart}
+        disabled={ifProductExistCart || loading}
       >
         <RenderSVG
           name={ifProductExistCart ? "added-favorit" : "favorit"}
