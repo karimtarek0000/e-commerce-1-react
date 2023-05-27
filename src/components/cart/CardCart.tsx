@@ -3,8 +3,8 @@ import Price from "../products/Price";
 import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
-import { Link, useNavigate } from "react-router-dom";
-import { ChangeEvent, MouseEvent, MouseEventHandler, useState } from "react";
+import { Link } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct, updateQuantity } from "../../store/cart";
@@ -35,7 +35,6 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
   const [quantity, setQuantity] = useState<number>(count);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const navigate = useNavigate();
 
   const deleteItemHandler = async (): Promise<void> => {
     setLoading(true);
