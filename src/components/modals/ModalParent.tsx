@@ -22,9 +22,11 @@ const ModalParent = ({ onConfirm, loading, ...props }: any): JSX.Element => {
       <Modal.Body>{props.children}</Modal.Body>
 
       {/* Footer */}
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-        {props.confirm && (
+      {props.confirm && (
+        <Modal.Footer>
+          {/* Close modal */}
+          <Button onClick={props.onHide}>Close</Button>
+          {/* For confirm */}
           <Button
             disabled={loading}
             onClick={() => onConfirm()}
@@ -35,8 +37,8 @@ const ModalParent = ({ onConfirm, loading, ...props }: any): JSX.Element => {
               <Spinner className="mx-1" animation="border" variant="light" />
             )}
           </Button>
-        )}
-      </Modal.Footer>
+        </Modal.Footer>
+      )}
     </Modal>
   );
 };

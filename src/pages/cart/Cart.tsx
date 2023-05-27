@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootStateCart } from "../../types";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import CardCart from "../../components/cart/CardCart";
 import { ProductCart } from "../../types/store";
 import guard from "../../gurad/gurad";
 import { Skeleton } from "../../components/skeleton/Skeleton";
+import CheckOut from "../../components/cart/CheckOut";
 
 function Cart() {
   const { products, numOfCartItems, totalCartPrice, loading } = useSelector(
@@ -34,8 +35,7 @@ function Cart() {
             </h3>
           </Col>
           <Col cols="3" className="flex-end-center">
-            <Button variant="primary">Checkout</Button>
-            {/* <Spinner className="mx-1" animation="border" variant="light" /> */}
+            <CheckOut />
           </Col>
           <hr className="mt-3" />
         </Row>

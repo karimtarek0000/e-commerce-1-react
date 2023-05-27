@@ -6,6 +6,13 @@ export type Login = {
   password: string;
 };
 
+// Order
+export type Order = {
+  phone: string;
+  city: string;
+  details: string;
+};
+
 export type SignUpTypes = {
   name: string;
   email: string;
