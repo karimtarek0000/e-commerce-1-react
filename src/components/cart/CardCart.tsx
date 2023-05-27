@@ -3,8 +3,8 @@ import Price from "../products/Price";
 import RatingProduct from "../products/RatingProduct";
 import RenderSVG from "../svg/RenderSVG";
 import { ProductCart } from "../../types/store";
-import { Link } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, MouseEvent, MouseEventHandler, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { removeProduct, updateQuantity } from "../../store/cart";
@@ -35,6 +35,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
   const [quantity, setQuantity] = useState<number>(count);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const navigate = useNavigate();
 
   const deleteItemHandler = async (): Promise<void> => {
     setLoading(true);
@@ -103,6 +104,9 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
               >
                 Category
               </Link>
+              <Link to={`/product/${id}`} className="text-uppercase">
+                More about product
+              </Link>
             </div>
           </Col>
         </Row>
@@ -132,7 +136,7 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           className="flex-center my-3 py-3 w-100 gap-3"
           variant="danger"
           type="submit"
-          onClick={() => setModalShow(true)}
+          onClick={(e) => setModalShow(true)}
         >
           Delete
           <RenderSVG name="remove" size="1.7rem" />
