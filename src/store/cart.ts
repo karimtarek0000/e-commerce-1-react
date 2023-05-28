@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AddToCart, PayloadGetCart, ProductCart } from "../types/store";
 import toast from "react-hot-toast";
+import { Order } from "../types";
 
 // Get cart
 export const getCart = createAsyncThunk(
@@ -70,17 +71,55 @@ export const removeProduct = createAsyncThunk(
   }
 );
 
+// Checkout
+export const checkOutCash = createAsyncThunk(
+  "cart/checkOutCash",
+  async (
+    { id, info }: { id: string; info: Order },
+    thunkAPI
+  ): Promise<object> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/orders/${id}`;
+      const { data } = await axios.post(url, {
+        shippingAddress: info,
+      });
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string) as never;
+    }
+  }
+);
+
+export const checkOutCredit = createAsyncThunk(
+  "cart/checkOutCredit",
+  async (id: string, thunkAPI): Promise<object> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/orders/checkout-session/${id}`;
+      const { data } = await axios.post(url);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string) as never;
+    }
+  }
+);
+
 const initialState: {
   products: ProductCart[];
   loading: boolean;
   totalCartPrice: number;
   numOfCartItems: number;
   idsInCart: string[];
+  ownerId: string;
 } = {
   products: [],
   loading: false,
   totalCartPrice: 0,
   numOfCartItems: 0,
+  ownerId: "",
   idsInCart: [],
 };
 
@@ -94,6 +133,7 @@ const cartSlice = createSlice({
       state.products = data.products.reverse();
       state.idsInCart = data.products.map((product) => product.product._id);
       state.totalCartPrice = data.totalCartPrice;
+      state.ownerId = data._id;
       state.loading = false;
     },
     errorHandler(state, actions) {

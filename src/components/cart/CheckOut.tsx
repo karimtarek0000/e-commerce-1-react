@@ -1,11 +1,15 @@
 import { Button, Form } from "react-bootstrap";
 import RenderSVG from "../svg/RenderSVG";
 import ModalParent from "../modals/ModalParent";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SubmitBtn from "../buttons/SubmitBtn";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Order } from "../../types";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { checkOutCash, checkOutCredit } from "../../store/cart";
+import toast from "react-hot-toast";
 
 const validationSchema: object = Yup.object().shape({
   phone: Yup.string()
@@ -14,8 +18,11 @@ const validationSchema: object = Yup.object().shape({
   city: Yup.string().required("Please enter your city"),
 });
 
-const CheckOut = (): JSX.Element => {
+const CheckOut = ({ ownerId }: { ownerId: string }): JSX.Element => {
   const [modalShow, setModalShow] = useState<boolean>(false);
+  const btnType = useRef<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   const initialValues: Order = {
     phone: "",
@@ -23,11 +30,31 @@ const CheckOut = (): JSX.Element => {
     details: "",
   };
 
+  // Payment
+  const orderByCash = async (info: Order) => {
+    setLoading(true);
+    await dispatch(checkOutCash({ id: ownerId, info }));
+    setLoading(false);
+  };
+  const orderByCredit = async () => {
+    await dispatch(checkOutCredit(ownerId));
+  };
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit(data: Order, { resetForm }) {
-      console.log(data);
+    async onSubmit(data: Order, { resetForm }) {
+      if (btnType.current === "cash") {
+        await orderByCash(data);
+        toast.success("Order has been successfully 🚀");
+      }
+
+      if (btnType.current === "credit") {
+        await orderByCredit();
+      }
+
+      setModalShow(false);
+      resetForm();
     },
   });
 
@@ -46,10 +73,13 @@ const CheckOut = (): JSX.Element => {
       {/* Modal for checkout */}
       <ModalParent
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={() => {
+          formik.resetForm();
+          setModalShow(false);
+        }}
         title="Order Details"
       >
-        <Form onSubmit={formik.handleSubmit}>
+        <Form>
           {/* Phone */}
           <Form.Group className="mb-3" controlId="formBasicPhone">
             <Form.Label>*Phone</Form.Label>
@@ -59,6 +89,7 @@ const CheckOut = (): JSX.Element => {
               onBlur={formik.handleBlur}
               type="text"
               name="phone"
+              autoComplete="off"
               placeholder="Enter your phone number"
             />
             {formik.touched.phone && formik.errors.phone && (
@@ -78,6 +109,7 @@ const CheckOut = (): JSX.Element => {
               type="text"
               name="city"
               placeholder="Enter your city"
+              autoComplete="off"
             />
             {formik.touched.city && formik.errors.city && (
               <Form.Text className="text-muted">{formik.errors.city}</Form.Text>
@@ -98,20 +130,31 @@ const CheckOut = (): JSX.Element => {
 
           {/* For submit */}
           <div className="flex-center w-100 gap-2 mt-5">
-            {/* Order by credit */}
+            {/* Order by Credit */}
             <SubmitBtn
               className="px-4 flex-center gap-3"
               title="Credit"
-              disabled={false}
+              disabled={loading}
+              type="button"
+              onClick={() => {
+                btnType.current = "credit";
+                formik.submitForm();
+              }}
             >
               <RenderSVG name="pay" size="1.8rem" />
             </SubmitBtn>
 
-            {/* Order by cash */}
+            {/* Order by Cash */}
             <SubmitBtn
               className="px-4 flex-center gap-3"
               title="Cash"
-              disabled={false}
+              loading={loading}
+              disabled={loading}
+              type="button"
+              onClick={() => {
+                btnType.current = "cash";
+                formik.submitForm();
+              }}
             >
               <RenderSVG name="cash" size="1.8rem" />
             </SubmitBtn>

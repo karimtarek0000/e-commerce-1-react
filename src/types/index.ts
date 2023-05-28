@@ -54,6 +54,7 @@ export type RootStateCart = {
     totalCartPrice: number;
     numOfCartItems: number;
     idsInCart: string[];
+    ownerId: string;
   };
 };
 

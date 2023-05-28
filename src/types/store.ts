@@ -1,8 +1,8 @@
 export type AllProductsType = { products?: object; total?: number };
 
 export type PayloadGetCart = {
+  data: { totalCartPrice: number; products: ProductCart[]; _id: string };
   numOfCartItems: number;
-  data: { totalCartPrice: number; products: ProductCart[] };
 };
 
 export type Products = {

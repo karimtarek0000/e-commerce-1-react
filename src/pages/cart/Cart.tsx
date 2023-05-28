@@ -8,9 +8,8 @@ import { Skeleton } from "../../components/skeleton/Skeleton";
 import CheckOut from "../../components/cart/CheckOut";
 
 function Cart() {
-  const { products, numOfCartItems, totalCartPrice, loading } = useSelector(
-    (state: RootStateCart) => state.cart
-  );
+  const { products, numOfCartItems, totalCartPrice, loading, ownerId } =
+    useSelector((state: RootStateCart) => state.cart);
 
   const renderCardCart = products?.map((product: ProductCart) => {
     return <CardCart key={product._id} productCard={product} />;
@@ -35,7 +34,7 @@ function Cart() {
             </h3>
           </Col>
           <Col cols="3" className="flex-end-center">
-            <CheckOut />
+            <CheckOut ownerId={ownerId} />
           </Col>
           <hr className="mt-3" />
         </Row>
