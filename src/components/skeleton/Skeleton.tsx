@@ -16,19 +16,21 @@ const Category = () => (
 const Product = () => {
   return (
     <ContentLoader
-      speed={1}
-      width={315}
-      height={700}
-      viewBox="0 0 315 700"
-      backgroundColor="#d6d6d6"
-      foregroundColor="#ebebeb"
+      speed={2}
+      width={300}
+      height={400}
+      viewBox="0 0 300 400"
+      backgroundColor="#f4ebeb"
+      foregroundColor="#e5dcdc"
     >
-      <rect x="3" y="14" rx="10" ry="10" width="310" height="238" />
-      <rect x="3" y="272" rx="10" ry="10" width="312" height="37" />
-      <rect x="7" y="330" rx="0" ry="0" width="338" height="8" />
-      <rect x="7" y="348" rx="0" ry="0" width="338" height="8" />
-      <rect x="7" y="366" rx="0" ry="0" width="342" height="8" />
-      <rect x="89" y="408" rx="10" ry="10" width="142" height="27" />
+      <rect x="2" y="7" rx="10" ry="10" width="295" height="174" />
+      <rect x="564" y="66" rx="0" ry="0" width="141" height="32" />
+      <rect x="564" y="118" rx="0" ry="0" width="142" height="32" />
+      <rect x="1" y="199" rx="10" ry="10" width="298" height="36" />
+      <rect x="1" y="256" rx="0" ry="0" width="343" height="13" />
+      <rect x="2" y="279" rx="0" ry="0" width="343" height="13" />
+      <rect x="3" y="304" rx="0" ry="0" width="340" height="13" />
+      <rect x="48" y="348" rx="10" ry="10" width="212" height="36" />
     </ContentLoader>
   );
 };
