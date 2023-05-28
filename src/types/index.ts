@@ -1,9 +1,16 @@
-import { ProductCart } from "./store";
+import { OrderCard, ProductCart } from "./store";
 
 // Auth
 export type Login = {
   email: string;
   password: string;
+};
+
+export type User = {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
 };
 
 // Order
@@ -21,7 +28,7 @@ export type SignUpTypes = {
 };
 
 export type RootStateAuth = {
-  auth: { loading: boolean; loggedIn: boolean; token: string; user: object };
+  auth: { loading: boolean; loggedIn: boolean; token: string; user: User };
 };
 
 // Products
@@ -55,6 +62,7 @@ export type RootStateCart = {
     numOfCartItems: number;
     idsInCart: string[];
     ownerId: string;
+    orders: OrderCard[];
   };
 };
 

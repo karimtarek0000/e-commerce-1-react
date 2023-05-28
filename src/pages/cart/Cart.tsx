@@ -6,6 +6,7 @@ import { ProductCart } from "../../types/store";
 import guard from "../../gurad/gurad";
 import { Skeleton } from "../../components/skeleton/Skeleton";
 import CheckOut from "../../components/cart/CheckOut";
+import NoData from "../../components/noData/NoData";
 
 function Cart() {
   const { products, numOfCartItems, totalCartPrice, loading, ownerId } =
@@ -56,17 +57,12 @@ function Cart() {
         )}
 
         {/* If no data exist */}
-        {!loading && !numOfCartItems && (
-          <div className="flex-center mt-5 flex-column">
-            <img
-              className="img-resize maxh-228 maxw-399"
-              src="https://assets.materialup.com/uploads/66fb8bdf-29db-40a2-996b-60f3192ea7f0/preview.png"
-              loading="lazy"
-              alt="no-data-in-cart"
-            />
-            <h4 className="fs-2">No there any product in cart</h4>
-          </div>
-        )}
+        <NoData
+          data={numOfCartItems}
+          loading={loading}
+          title="No there any product in cart"
+          img="https://assets.materialup.com/uploads/66fb8bdf-29db-40a2-996b-60f3192ea7f0/preview.png"
+        />
       </div>
     </Container>
   );

@@ -1,18 +1,30 @@
 type NoDataTypes = {
-  data: Array<any>;
+  data: number;
   loading: boolean;
   title?: string;
+  img?: string;
 };
 
 function NoData({
   data,
   loading,
   title = "No data",
+  img,
 }: NoDataTypes): JSX.Element {
   return (
     <>
-      {!data.length && !loading && (
-        <h2 className="text-center my-5 text-danger mt-4">{title}</h2>
+      {!data && !loading && (
+        <div className="flex-center mt-5 flex-column">
+          {img && (
+            <img
+              className="img-resize maxh-228 maxw-399"
+              src={img}
+              loading="lazy"
+              alt="no-data-in-cart"
+            />
+          )}
+          <h4 className="fs-2">{title}</h4>
+        </div>
       )}
     </>
   );

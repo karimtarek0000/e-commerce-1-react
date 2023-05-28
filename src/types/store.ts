@@ -41,3 +41,11 @@ export type ProductCart = {
     };
   };
 };
+
+export type OrderCard = {
+  cartItems: ProductCart[];
+  paymentMethodType: string;
+  totalOrderPrice: string;
+  id: string;
+  _id: string;
+};

@@ -15,9 +15,10 @@ const ModalParent = lazy(() => import("../modals/ModalParent"));
 
 type CardCartType = {
   productCard: ProductCart;
+  type?: boolean;
 };
 
-const CardCart = ({ productCard }: CardCartType): JSX.Element => {
+const CardCart = ({ productCard, type = true }: CardCartType): JSX.Element => {
   const {
     price,
     count,
@@ -76,13 +77,15 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
           </Col>
           {/* Price for product */}
           <Col className="d-flex justify-content-center justify-content-md-start align-items-center gap-3">
-            <Price price={price} />-
-            <h4 className="text-capitalize fs-4 mt-1">
-              available quantity:{" "}
-              <span className="bg-primary px-2 py-1 text-white rounded">
-                {_quantity}
-              </span>
-            </h4>
+            <Price price={price} />
+            {type && (
+              <h4 className="text-capitalize fs-4 mt-1">
+                available quantity:{" "}
+                <span className="bg-primary px-2 py-1 text-white rounded">
+                  {_quantity}
+                </span>
+              </h4>
+            )}
           </Col>
           {/* Rating for product */}
           <Col className="d-flex flex-column align-items-center align-items-md-start">
@@ -93,17 +96,17 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
             <div className="flex-start-center mt-2 gap-3">
               <Link
                 to={`/products/brand/${brand.slug}/${brand._id}`}
-                className="text-uppercase"
+                className="text-uppercase fs-5"
               >
                 Brand
               </Link>
               <Link
                 to={`/products/category/${category.slug}/${category._id}`}
-                className="text-uppercase"
+                className="text-uppercase fs-5"
               >
                 Category
               </Link>
-              <Link to={`/product/${id}`} className="text-uppercase">
+              <Link to={`/product/${id}`} className="text-uppercase fs-5">
                 More about product
               </Link>
             </div>
@@ -111,40 +114,42 @@ const CardCart = ({ productCard }: CardCartType): JSX.Element => {
         </Row>
       </Col>
       {/* Quantity for product */}
-      <Col
-        sm="6"
-        md="2"
-        lg="2"
-        className="flex-center h-100 mt-3 mt-md-0 flex-column"
-      >
-        <h5>Enter Quantity</h5>
-        <input
-          type="number"
-          value={quantity}
-          className="form-control text-center"
-          onChange={setQuantityHandler}
-          onBlur={updateQuantityHandler}
-          min={0}
-          placeholder="Quantity"
-          aria-label="quantity"
-          aria-describedby="quantity"
-        />
-
-        {/*  */}
-        <Button
-          className="flex-center my-3 py-3 w-100 gap-3"
-          variant="danger"
-          type="submit"
-          onClick={(e) => setModalShow(true)}
+      {type && (
+        <Col
+          sm="6"
+          md="2"
+          lg="2"
+          className="flex-center h-100 mt-3 mt-md-0 flex-column"
         >
-          Delete
-          <RenderSVG name="remove" size="1.7rem" />
-        </Button>
-      </Col>
+          <h5>Enter Quantity</h5>
+          <input
+            type="number"
+            value={quantity}
+            className="form-control text-center"
+            onChange={setQuantityHandler}
+            onBlur={updateQuantityHandler}
+            min={0}
+            placeholder="Quantity"
+            aria-label="quantity"
+            aria-describedby="quantity"
+          />
+
+          {/*  */}
+          <Button
+            className="flex-center my-3 py-3 w-100 gap-3"
+            variant="danger"
+            type="submit"
+            onClick={(e) => setModalShow(true)}
+          >
+            Delete
+            <RenderSVG name="remove" size="1.7rem" />
+          </Button>
+        </Col>
+      )}
 
       {/* Modal for delete a product */}
       <Suspense>
-        {modalShow && (
+        {modalShow && type && (
           <ModalParent
             show={modalShow}
             onHide={() => setModalShow(false)}

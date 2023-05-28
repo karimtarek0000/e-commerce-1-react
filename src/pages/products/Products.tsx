@@ -41,7 +41,7 @@ function Products() {
     <Container>
       <h1 className="text-center my-5 fs-1 text-capitalize fw-bold">{name}</h1>
 
-      {products.length && <FilterBar setFilter={setFilter} />}
+      {products.length ? <FilterBar setFilter={setFilter} /> : null}
 
       <ResponsivePagination
         current={currentPage}
@@ -49,7 +49,11 @@ function Products() {
         onPageChange={setCurrentPage}
       />
 
-      <NoData loading={loading} data={products} title="No there any products" />
+      <NoData
+        loading={loading}
+        data={products.length}
+        title="No there any products"
+      />
 
       <div className="grid-cards my-5">
         {loading ? (

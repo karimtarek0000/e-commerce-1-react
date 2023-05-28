@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AddToCart, PayloadGetCart, ProductCart } from "../types/store";
+import {
+  AddToCart,
+  OrderCard,
+  PayloadGetCart,
+  ProductCart,
+} from "../types/store";
 import toast from "react-hot-toast";
 import { Order } from "../types";
 
@@ -110,6 +115,22 @@ export const checkOutCredit = createAsyncThunk(
   }
 );
 
+// Get all orders
+export const getAllOrders = createAsyncThunk(
+  "cart/getAllOrders",
+  async (id: string, thunkAPI): Promise<OrderCard[]> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/orders/user/${id}`;
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string) as never;
+    }
+  }
+);
+
 const initialState: {
   products: ProductCart[];
   loading: boolean;
@@ -117,6 +138,7 @@ const initialState: {
   numOfCartItems: number;
   idsInCart: string[];
   ownerId: string;
+  orders: OrderCard[];
 } = {
   products: [],
   loading: false,
@@ -124,6 +146,7 @@ const initialState: {
   numOfCartItems: 0,
   ownerId: "",
   idsInCart: [],
+  orders: [],
 };
 
 const cartSlice = createSlice({
@@ -158,6 +181,9 @@ const cartSlice = createSlice({
       .addCase(updateQuantity.fulfilled, (state, { payload }) => {
         const { data } = payload as PayloadGetCart;
         state.totalCartPrice = data.totalCartPrice;
+      })
+      .addCase(getAllOrders.fulfilled, (state, { payload }) => {
+        state.orders = payload.reverse() as OrderCard[];
       })
       // Error handling
       .addCase(getCart.rejected, (state, actions) => {

@@ -47,10 +47,10 @@ const authSlice = createSlice({
   reducers: {
     setRegister(state, actions) {
       const { user, token } = actions.payload;
-      state.user = user;
+      state.user = { ...JSON.parse(window.atob(token.split(".")[1])), ...user };
       state.token = token;
       state.loggedIn = true;
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(state.user));
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("loggedIn", JSON.stringify(true));
     },
