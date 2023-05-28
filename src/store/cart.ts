@@ -71,7 +71,7 @@ export const removeProduct = createAsyncThunk(
   }
 );
 
-// Checkout
+// Payment | Cash and Credit
 export const checkOutCash = createAsyncThunk(
   "cart/checkOutCash",
   async (
@@ -159,6 +159,11 @@ const cartSlice = createSlice({
       // Error handling
       .addCase(getCart.rejected, (state, actions) => {
         state.loading = false;
+        state.products = [];
+        state.totalCartPrice = 0;
+        state.numOfCartItems = 0;
+        state.ownerId = "";
+        state.idsInCart = [];
       })
       .addCase(removeProduct.rejected, (state, actions) => {
         cartSlice.caseReducers.errorHandler(state, actions);

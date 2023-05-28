@@ -24,6 +24,10 @@ const router = createBrowserRouter([
         element: lazyLoadRoutes("cart/Cart"),
       },
       {
+        path: "orders",
+        element: lazyLoadRoutes("orders/Orders"),
+      },
+      {
         path: "favorites",
         element: lazyLoadRoutes("favorites/Favorites"),
       },

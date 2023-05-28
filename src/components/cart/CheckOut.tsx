@@ -1,15 +1,16 @@
 import { Button, Form } from "react-bootstrap";
 import RenderSVG from "../svg/RenderSVG";
 import ModalParent from "../modals/ModalParent";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SubmitBtn from "../buttons/SubmitBtn";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Order } from "../../types";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { checkOutCash, checkOutCredit } from "../../store/cart";
+import { checkOutCash, checkOutCredit, getCart } from "../../store/cart";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema: object = Yup.object().shape({
   phone: Yup.string()
@@ -23,6 +24,13 @@ const CheckOut = ({ ownerId }: { ownerId: string }): JSX.Element => {
   const btnType = useRef<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return () => {
+      dispatch(getCart());
+    };
+  }, [dispatch]);
 
   const initialValues: Order = {
     phone: "",
@@ -33,11 +41,11 @@ const CheckOut = ({ ownerId }: { ownerId: string }): JSX.Element => {
   // Payment
   const orderByCash = async (info: Order) => {
     setLoading(true);
-    await dispatch(checkOutCash({ id: ownerId, info }));
+    await dispatch(checkOutCash({ id: ownerId, info })).unwrap();
     setLoading(false);
   };
   const orderByCredit = async () => {
-    await dispatch(checkOutCredit(ownerId));
+    await dispatch(checkOutCredit(ownerId)).unwrap();
   };
 
   const formik = useFormik({
@@ -54,6 +62,7 @@ const CheckOut = ({ ownerId }: { ownerId: string }): JSX.Element => {
       }
 
       setModalShow(false);
+      navigate("/orders");
       resetForm();
     },
   });
