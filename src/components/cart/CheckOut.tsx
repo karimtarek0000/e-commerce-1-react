@@ -41,10 +41,10 @@ const CheckOut = ({ ownerId }: { ownerId: string }): JSX.Element => {
   };
 
   // Payment
-  const orderByCash = async (info: Order) => {
+  const orderByCash = async (info: Order): Promise<void> => {
     await dispatch(checkOutCash({ id: ownerId, info })).unwrap();
   };
-  const orderByCredit = async () => {
+  const orderByCredit = async (): Promise<void> => {
     const path = window.location.origin;
     const url = await dispatch(checkOutCredit({ id: ownerId, path })).unwrap();
     window.open(url);
