@@ -94,13 +94,16 @@ export const checkOutCash = createAsyncThunk(
 
 export const checkOutCredit = createAsyncThunk(
   "cart/checkOutCredit",
-  async (id: string, thunkAPI): Promise<object> => {
+  async (
+    { id, path }: { id: string; path: string },
+    thunkAPI
+  ): Promise<string> => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const url = `${process.env.REACT_APP_VERSION}/orders/checkout-session/${id}`;
+      const url = `${process.env.REACT_APP_VERSION}/orders/checkout-session/${id}?url=${path}`;
       const { data } = await axios.post(url);
 
-      return data;
+      return data.session.url;
     } catch (error: any) {
       return rejectWithValue(error.response.data.message as string) as never;
     }
