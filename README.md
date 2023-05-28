@@ -3,7 +3,7 @@
 - Typescript
 - Redux | Redux-toolkit
 - Formik
-- Routing
+- Routing with React-router
 - Guard pages with (HOF)
 - Payment - You can use this card for testing with stripe ( 4242 4242 4242 4242 )
 - Lazy component and lazy pages
