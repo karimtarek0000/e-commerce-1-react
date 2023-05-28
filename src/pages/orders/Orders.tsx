@@ -1,4 +1,5 @@
 import { Container } from "react-bootstrap";
+import guard from "../../gurad/gurad";
 
 const Orders = (): JSX.Element => {
   return (
@@ -8,4 +9,4 @@ const Orders = (): JSX.Element => {
   );
 };
 
-export default Orders;
+export default guard(Orders);

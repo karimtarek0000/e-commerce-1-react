@@ -30,9 +30,9 @@ function Profile(): JSX.Element {
       <Dropdown.Item
         className="d-flex align-items-center my-3"
         as={Link}
-        to="/"
+        to="/allorders"
       >
-        <RenderSVG className="me-2" name="settings" size="2rem" />
+        <RenderSVG className="me-2" name="orders" size="2rem" />
         Orders
       </Dropdown.Item>
       <Dropdown.Item onClick={logoutHandler} as={Button}>
