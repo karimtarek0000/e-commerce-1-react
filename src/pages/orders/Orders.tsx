@@ -59,18 +59,7 @@ const Orders = (): JSX.Element => {
   return (
     <Container>
       <Accordion defaultActiveKey="0" className="mt-5">
-        {loading ? (
-          <>
-            <div className="d-none d-md-block">
-              <Skeleton.CardCart />
-            </div>
-            <div className="d-md-none">
-              <Skeleton.CardCart type="responsive" />
-            </div>
-          </>
-        ) : (
-          renderCardOrder
-        )}
+        {loading ? <Skeleton.CardOrder /> : renderCardOrder}
       </Accordion>
 
       {/* If no data exist */}

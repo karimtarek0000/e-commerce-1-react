@@ -47,10 +47,10 @@ function Cart() {
       <div className="mt-2">
         {loading ? (
           <>
-            <div className="d-none d-md-block">
+            <div className="d-none d-md-block mt-5">
               <Skeleton.CardCart />
             </div>
-            <div className="d-md-none">
+            <div className="d-flex justify-content-center mt-5 d-md-none">
               <Skeleton.CardCart type="responsive" />
             </div>
           </>

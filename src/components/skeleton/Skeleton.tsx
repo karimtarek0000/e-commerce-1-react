@@ -99,6 +99,7 @@ const CardCart = ({ type }: { type?: "responsive" }) => {
   if (type === "responsive") {
     return (
       <ContentLoader
+        style={{ maxWidth: "100%" }}
         speed={2}
         width={400}
         height={400}
@@ -119,20 +120,37 @@ const CardCart = ({ type }: { type?: "responsive" }) => {
   }
   return (
     <ContentLoader
+      style={{ maxWidth: "100%" }}
       speed={2}
-      width={1000}
+      width={1300}
       height={200}
-      viewBox="0 0 1000 200"
+      viewBox="0 0 1300 200"
       backgroundColor="#f4ebeb"
       foregroundColor="#e5dcdc"
     >
       <rect x="9" y="17" rx="0" ry="0" width="250" height="174" />
-      <rect x="289" y="15" rx="0" ry="0" width="700" height="32" />
-      <rect x="291" y="64" rx="0" ry="0" width="700" height="12" />
-      <rect x="291" y="85" rx="0" ry="0" width="700" height="12" />
-      <rect x="290" y="107" rx="0" ry="0" width="700" height="12" />
-      <rect x="290" y="128" rx="0" ry="0" width="700" height="12" />
-      <rect x="290" y="157" rx="0" ry="0" width="700" height="32" />
+      <rect x="289" y="15" rx="0" ry="0" width="1100" height="32" />
+      <rect x="291" y="64" rx="0" ry="0" width="1100" height="12" />
+      <rect x="291" y="85" rx="0" ry="0" width="1100" height="12" />
+      <rect x="290" y="107" rx="0" ry="0" width="1100" height="12" />
+      <rect x="290" y="128" rx="0" ry="0" width="1100" height="12" />
+      <rect x="290" y="157" rx="0" ry="0" width="1100" height="32" />
+    </ContentLoader>
+  );
+};
+
+const CardOrder = ({ type }: { type?: "responsive" }) => {
+  return (
+    <ContentLoader
+      style={{ maxWidth: "100%" }}
+      speed={2}
+      width={1300}
+      height={200}
+      viewBox="0 0 1300 200"
+      backgroundColor="#f4ebeb"
+      foregroundColor="#e5dcdc"
+    >
+      <rect x="13" y="25" rx="5" ry="5" width="1280" height="172" />
     </ContentLoader>
   );
 };
@@ -142,4 +160,5 @@ export const Skeleton = {
   Product,
   ProductDetails,
   CardCart,
+  CardOrder,
 };
