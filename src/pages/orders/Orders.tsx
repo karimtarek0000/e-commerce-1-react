@@ -31,19 +31,19 @@ const Orders = (): JSX.Element => {
     return (
       <Accordion.Item key={order.id} eventKey={`${i}`}>
         <Accordion.Header>
-          <span className="bg-primary py-1 px-2 rounded text-white fs-2">
+          <span className="bg-primary py-1 px-2 rounded text-white fs-3">
             #{order.id}
           </span>
-          <h4 className="fs-2 ms-3">
+          <h4 className="fs-3 ms-3">
             Payment Method:{" "}
             <span className="bg-primary py-1 px-2 rounded text-white text-capitalize">
               {order.paymentMethodType}
             </span>
           </h4>
-          <h4 className="fs-2 ms-3">
+          <h4 className="fs-3 ms-3">
             Total Price:{" "}
             <span className="bg-primary py-1 px-2 rounded text-white">
-              ${order.totalOrderPrice}
+              ${order.totalOrderPrice.toLocaleString("en-US")}
             </span>
           </h4>
         </Accordion.Header>
@@ -58,7 +58,7 @@ const Orders = (): JSX.Element => {
 
   return (
     <Container>
-      <Accordion className="mt-5">
+      <Accordion defaultActiveKey="0" className="mt-5">
         {loading ? (
           <>
             <div className="d-none d-md-block">

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { RootStateCart } from "../../types";
 import AuthLinks from "../authLinks/AuthLinks";
 import Cart from "../cart/Cart";
-import Favorit from "../favorit/Favorit";
 import Logo from "../logo/Logo";
 import Profile from "../profile/Profile";
 import { ThunkDispatch } from "@reduxjs/toolkit";
@@ -50,15 +49,13 @@ function NavC(): JSX.Element {
             {isAuth ? (
               <div className="flex-center">
                 <Profile />
-                <div className="mx-5">
+                <div className="mx-2">
                   <Cart count={numOfCartItems} />
                 </div>
-                <Favorit />
               </div>
             ) : (
               <AuthLinks />
             )}
-            <Navbar.Toggle className="ms-4 fs-2" aria-controls="navbarScroll" />
           </div>
         </Nav>
       </Container>

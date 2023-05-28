@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import { Outlet } from "react-router";
 import Logo from "../../components/logo/Logo";
 import guard from "../../gurad/gurad";
+import { Link } from "react-router-dom";
 
 function Auth(): JSX.Element {
   return (
@@ -21,9 +22,9 @@ function Auth(): JSX.Element {
           {/* Start col - form */}
           <div className="col-sm-6 col-lg-5">
             {/* Logo */}
-            <div className="text-center">
+            <Link to="/" className="text-center d-block">
               <Logo />
-            </div>
+            </Link>
 
             {/* Pages */}
             <Outlet />

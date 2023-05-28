@@ -15,10 +15,6 @@ html {
   }
 }
 
-.carousel-caption {
-  bottom: inherit;
-}
-
 .pagination {
   justify-content: center;
   display: flex;
@@ -42,4 +38,8 @@ a.page-link:hover {
 .page-item.active .page-link {
   color: #ffffff;
   background-color: #007bff;
+}
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
 }

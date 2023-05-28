@@ -78,11 +78,18 @@ const CardCart = ({ productCard, type = true }: CardCartType): JSX.Element => {
           {/* Price for product */}
           <Col className="d-flex justify-content-center justify-content-md-start align-items-center gap-3">
             <Price price={price} />
-            {type && (
+            {type ? (
               <h4 className="text-capitalize fs-4 mt-1">
                 available quantity:{" "}
                 <span className="bg-primary px-2 py-1 text-white rounded">
                   {_quantity}
+                </span>
+              </h4>
+            ) : (
+              <h4 className="text-capitalize fs-4 mt-1">
+                X
+                <span className="bg-primary px-2 py-1 text-white rounded mx-2">
+                  {count}
                 </span>
               </h4>
             )}
@@ -147,7 +154,7 @@ const CardCart = ({ productCard, type = true }: CardCartType): JSX.Element => {
         </Col>
       )}
 
-      {/* Modal for delete a product */}
+      {/* Modal for confirm delete a product */}
       <Suspense>
         {modalShow && type && (
           <ModalParent

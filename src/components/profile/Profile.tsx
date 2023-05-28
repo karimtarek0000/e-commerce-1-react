@@ -20,23 +20,22 @@ function Profile(): JSX.Element {
   return (
     <DropdownButton
       align="end"
-      className="d-none d-lg-block"
       title={<RenderSVG className="cursor-pointer" name="profile" />}
     >
-      <Dropdown.Item className="d-flex align-items-center" as={Link} to="/">
-        <RenderSVG className="me-2" name="settings" size="2rem" />
-        Settings
-      </Dropdown.Item>
       <Dropdown.Item
-        className="d-flex align-items-center my-3"
+        className="d-flex align-items-center fs-3 py-4"
         as={Link}
         to="/allorders"
       >
-        <RenderSVG className="me-2" name="orders" size="2rem" />
-        Orders
+        <RenderSVG className="me-3" name="orders" size="2rem" />
+        My Orders
       </Dropdown.Item>
-      <Dropdown.Item onClick={logoutHandler} as={Button}>
-        <RenderSVG className="me-2" name="logout" size="2rem" />
+      <Dropdown.Item
+        className="d-flex align-items-center fs-3 py-4"
+        onClick={logoutHandler}
+        as={Button}
+      >
+        <RenderSVG className="me-3" name="logout" size="2rem" />
         Logout
       </Dropdown.Item>
     </DropdownButton>

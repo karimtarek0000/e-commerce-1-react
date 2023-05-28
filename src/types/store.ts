@@ -45,7 +45,7 @@ export type ProductCart = {
 export type OrderCard = {
   cartItems: ProductCart[];
   paymentMethodType: string;
-  totalOrderPrice: string;
+  totalOrderPrice: number;
   id: string;
   _id: string;
 };

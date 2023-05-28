@@ -52,7 +52,7 @@ function Products() {
       <NoData
         loading={loading}
         data={products.length}
-        title="No there any products"
+        title="No there any product"
       />
 
       <div className="grid-cards my-5">

@@ -7,6 +7,7 @@ import guard from "../../gurad/gurad";
 import { Skeleton } from "../../components/skeleton/Skeleton";
 import CheckOut from "../../components/cart/CheckOut";
 import NoData from "../../components/noData/NoData";
+import RemoveAll from "../../components/cart/RemoveAll";
 
 function Cart() {
   const { products, numOfCartItems, totalCartPrice, loading, ownerId } =
@@ -19,7 +20,7 @@ function Cart() {
   return (
     <Container className="px-4 px-lg-0">
       {numOfCartItems > 0 && (
-        <Row className="mt-4 justify-content-between">
+        <Row className="mt-4 justify-content-between align-items-center">
           <Col cols="3" className="flex-start flex-column">
             <h3 className="fs-2 mb-3">
               Count:
@@ -34,8 +35,9 @@ function Cart() {
               </span>
             </h3>
           </Col>
-          <Col cols="3" className="flex-end-center">
+          <Col cols="3" className="d-flex align-items-end flex-column gap-2">
             <CheckOut ownerId={ownerId} />
+            <RemoveAll />
           </Col>
           <hr className="mt-3" />
         </Row>

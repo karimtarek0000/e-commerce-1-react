@@ -76,6 +76,20 @@ export const removeProduct = createAsyncThunk(
   }
 );
 
+// Remove all products from cart
+export const removeAllProducts = createAsyncThunk(
+  "cart/removeAllProducts",
+  async (_, thunkAPI): Promise<void> => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const url = `${process.env.REACT_APP_VERSION}/cart`;
+      await axios.delete(url);
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message as string) as never;
+    }
+  }
+);
+
 // Payment | Cash and Credit
 export const checkOutCash = createAsyncThunk(
   "cart/checkOutCash",
@@ -166,17 +180,29 @@ const cartSlice = createSlice({
       toast.error(actions.payload as string);
       state.loading = false;
     },
+    resetAll(state) {
+      state.loading = false;
+      state.products = [];
+      state.totalCartPrice = 0;
+      state.numOfCartItems = 0;
+      state.ownerId = "";
+      state.idsInCart = [];
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(getCart.pending, (state) => {
         state.loading = true;
       })
+      // Resolve
       .addCase(getCart.fulfilled, (state, { payload }) => {
         cartSlice.caseReducers.addToProductToCart(state, { payload } as any);
       })
       .addCase(removeProduct.fulfilled, (state, { payload }) => {
         cartSlice.caseReducers.addToProductToCart(state, { payload } as any);
+      })
+      .addCase(removeAllProducts.fulfilled, (state) => {
+        cartSlice.caseReducers.resetAll(state);
       })
       .addCase(updateQuantity.fulfilled, (state, { payload }) => {
         const { data } = payload as PayloadGetCart;
@@ -186,15 +212,13 @@ const cartSlice = createSlice({
         state.orders = payload.reverse() as OrderCard[];
       })
       // Error handling
-      .addCase(getCart.rejected, (state, actions) => {
-        state.loading = false;
-        state.products = [];
-        state.totalCartPrice = 0;
-        state.numOfCartItems = 0;
-        state.ownerId = "";
-        state.idsInCart = [];
+      .addCase(getCart.rejected, (state) => {
+        cartSlice.caseReducers.resetAll(state);
       })
       .addCase(removeProduct.rejected, (state, actions) => {
+        cartSlice.caseReducers.errorHandler(state, actions);
+      })
+      .addCase(removeAllProducts.rejected, (state, actions) => {
         cartSlice.caseReducers.errorHandler(state, actions);
       })
       .addCase(updateQuantity.rejected, (state, actions) => {
