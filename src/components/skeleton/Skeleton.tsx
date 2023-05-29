@@ -1,21 +1,25 @@
 import ContentLoader from "react-content-loader";
 
-const Category = () => (
-  <ContentLoader
-    speed={1}
-    width={476}
-    height={700}
-    viewBox="0 0 476 700"
-    backgroundColor="#d6d6d6"
-    foregroundColor="#ebebeb"
-  >
-    <rect x="17" y="16" rx="5" ry="5" width="344" height="485" />
-  </ContentLoader>
-);
+const Category = () => {
+  return (
+    <ContentLoader
+      style={{ maxWidth: "100%" }}
+      speed={2}
+      width={350}
+      height={445}
+      viewBox="0 0 350 445"
+      backgroundColor="#f4ebeb"
+      foregroundColor="#e5dcdc"
+    >
+      <rect x="0" y="1" rx="0" ry="0" width="340" height="441" />
+    </ContentLoader>
+  );
+};
 
 const Product = () => {
   return (
     <ContentLoader
+      style={{ maxWidth: "100%" }}
       speed={2}
       width={300}
       height={400}
@@ -39,6 +43,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
   if (type === "image") {
     return (
       <ContentLoader
+        style={{ maxWidth: "100%" }}
         speed={2}
         width={700}
         height={700}
@@ -58,6 +63,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
   if (type === "imageResponsive") {
     return (
       <ContentLoader
+        style={{ maxWidth: "100%" }}
         speed={2}
         width={700}
         height={700}
@@ -76,6 +82,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
 
   return (
     <ContentLoader
+      style={{ maxWidth: "100%" }}
       speed={2}
       width={700}
       height={200}
