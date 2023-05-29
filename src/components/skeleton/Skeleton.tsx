@@ -47,7 +47,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
         speed={2}
         width={700}
         height={700}
-        viewBox="0 0 700 700"
+        viewBox="0 0 500 700"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -67,7 +67,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
         speed={2}
         width={700}
         height={700}
-        viewBox="0 0 700 700"
+        viewBox="0 0 500 700"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -86,7 +86,7 @@ const ProductDetails = ({ type }: { type?: string }) => {
       speed={2}
       width={700}
       height={200}
-      viewBox="0 0 700 200"
+      viewBox="0 0 500 200"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
     >
