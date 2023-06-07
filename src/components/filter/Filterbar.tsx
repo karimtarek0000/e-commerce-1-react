@@ -10,7 +10,7 @@ const FilterBar = ({
   setFilter: Dispatch<SetStateAction<string>>;
 }): JSX.Element => {
   const [rating, setRating] = useState<number>(0);
-  const [price, setPrice] = useState<[number, number]>([200, 100000]);
+  const [price, setPrice] = useState<[number, number]>([100, 6000]);
   const [statusfilterBtn, setStatusFilterBtn] = useState<boolean>(false);
   const [statusFilter, setStatusFilter] = useState<boolean>(false);
 
@@ -33,7 +33,7 @@ const FilterBar = ({
   };
   const resetFilterHandler: MouseEventHandler = () => {
     setRating(0);
-    setPrice([200, 100000]);
+    setPrice([100, 6000]);
     setFilter("");
     setStatusFilter(false);
     setStatusFilterBtn(false);
@@ -71,8 +71,8 @@ const FilterBar = ({
         <Col className="d-flex justify-content-center">
           <RangePrice
             handleChange={handleChange}
-            min={200}
-            max={100000}
+            min={100}
+            max={6000}
             value={price}
           />
         </Col>

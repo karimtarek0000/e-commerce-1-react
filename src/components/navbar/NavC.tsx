@@ -1,4 +1,4 @@
-import { Container, Form, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootStateCart } from "../../types";
@@ -30,21 +30,10 @@ function NavC(): JSX.Element {
 
         {/* Navbar items */}
         <Nav
-          className="me-auto overflow-visible flex-grow-1 d-flex  justify-content-between"
+          className="me-auto overflow-visible flex-grow-1 d-flex  justify-content-end"
           style={{ maxHeight: "100px" }}
           navbarScroll
         >
-          {/* Search */}
-          <Form className="d-none d-lg-flex">
-            <Form.Control
-              type="text"
-              placeholder="Search products..."
-              className="me-2 fs-3"
-              aria-label="Search"
-              style={{ width: "400px" }}
-            />
-          </Form>
-
           <div className="flex-end-center">
             {isAuth ? (
               <div className="flex-center">
